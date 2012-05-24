@@ -1,0 +1,28 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <!-- LINKS -->
+      <%= link_to "Dengueapp", root_path, :class => "brand" %>
+      <ul class="nav">
+        <% if usuario_atual %>
+          <li><%= (link_to "Gerenciar Denúncias", denuncias_path) if can? :index, Denuncia %></li>
+          <li><%= (link_to "Gerenciar Operadores", operadores_path) if can? :index, Operador%></li>
+          <li><%= (link_to "Todas as Denúncias", home_denunciante_path) if can? :minhas_denuncias, Denuncia%></li>
+          <li><%= (link_to "Minhas Denúncias", minhas_denuncias_path) if can? :minhas_denuncias, Denuncia %></li>
+        <% end %>
+      </ul>
+      <!-- BOX DE LOGIN E SAIR-->
+      <% if usuario_atual %>
+        <ul class="nav pull-right">
+          <li><%= link_to('Sair', destroy_usuario_session_path, :method => :delete) %></li
+        </ul>
+      <% else %>
+        <%= form_for(:usuario, :url => usuario_session_path, :html => {:class => 'navbar-form pull-right'}) do |f|%>
+          <%= f.text_field :email, :class => "input", :placeholder => "E-mail" %>
+          <%= f.password_field :password , :class => "input", :placeholder => "Senha" %>
+          <%= f.submit "Acessar" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

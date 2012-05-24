@@ -1,0 +1,35 @@
+<%- model_class = @denuncia.class -%>
+<h1><%=t '.title', :default => model_class.model_name.human %></h1>
+
+<p>
+  <strong><%= model_class.human_attribute_name(:data_e_hora) %>:</strong><br>
+  <%= @denuncia.data_e_hora %>
+</p>
+<p>
+  <strong><%= model_class.human_attribute_name(:latitude) %>:</strong><br>
+  <%= @denuncia.latitude %>
+</p>
+<p>
+  <strong><%= model_class.human_attribute_name(:longitude) %>:</strong><br>
+  <%= @denuncia.longitude %>
+</p>
+<p>
+  <strong><%= model_class.human_attribute_name(:situacao) %>:</strong><br>
+  <%= @denuncia.situacao %>
+</p>
+<p>
+  <strong><%= model_class.human_attribute_name(:denunciante_id) %>:</strong><br>
+  <%= @denuncia.denunciante_id %>
+</p>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              denuncias_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_denuncia_path(@denuncia), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              denuncia_path(@denuncia),
+              :method => 'delete',
+              :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+              :class => 'btn btn-danger' %>
+</div>
