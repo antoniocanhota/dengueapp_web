@@ -15,7 +15,7 @@ class Operador < ActiveRecord::Base
   
   before_create :atribuir_valores_iniciais
   before_validation :verificar_existencia_do_usuario, :on => :create
-  
+    
   scope :administradores, where("tipo = '#{Operador::ADMINISTRADOR}' and (situacao = '#{Operador::ATIVO}' or situacao = '#{Operador::PRECADASTRADO}')")
   scope :administradores_inclusive_inativos, where("tipo = '#{Operador::ADMINISTRADOR}' and (situacao = '#{Operador::ATIVO}' or situacao = '#{Operador::PRECADASTRADO}' or situacao = '#{Operador::INATIVO}')")
   scope :administradores_inativos, where("tipo = '#{Operador::ADMINISTRADOR}' and situacao = '#{Operador::INATIVO}'")
@@ -84,5 +84,5 @@ class Operador < ActiveRecord::Base
       return false
     end
   end
-  
+
 end

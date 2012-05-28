@@ -4,6 +4,14 @@ module ApplicationHelper
     "active" if current_page?(path)
   end
   
+  def exibir_primeiro_nome(nome)
+    if nome
+      nome.split.first.capitalize
+    else
+      "usuário"
+    end
+  end
+  
   def decodificar(constante)
     case constante
     when Operador::ADMINISTRADOR

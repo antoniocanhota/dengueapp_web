@@ -29,7 +29,7 @@ class OperadoresController < ApplicationController
     @operador = Operador.new(params[:operador])
     @operador.usuario.password_confirmation = @operador.usuario.password = Usuario::SENHA_PADRAO
     if @operador.save
-      #DengueAppMailer.registration_confirmation(@operador.usuario).deliver
+      DengueAppMailer.notificar_alteracao_em_operador(@operador,"ativado").deliver
       redirect_to @operador, :notice => 'Operador cadastrado e/ou habilitado com sucesso.' 
     else
       render :action => "new"
@@ -39,6 +39,7 @@ class OperadoresController < ApplicationController
   def desativar
     @operador = Operador.find(params[:id])
     if @operador.desativar
+      DengueAppMailer.notificar_alteracao_em_operador(@operador,"desativado").deliver
       redirect_to @operador, :notice => 'Operador desativado com sucesso.'
     else
       redirect_to @operador, :error => 'Erro ao desativar o operador.'
@@ -48,6 +49,7 @@ class OperadoresController < ApplicationController
   def ativar
     @operador = Operador.find(params[:id])
     if @operador.ativar
+      DengueAppMailer.notificar_alteracao_em_operador(@operador,"ativado").deliver
       redirect_to @operador, :notice => 'Operador ativado com sucesso.'
     else
       redirect_to @operador, :error => 'Erro ao ativar o operador.'

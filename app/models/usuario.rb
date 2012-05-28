@@ -13,6 +13,8 @@ class Usuario < ActiveRecord::Base
   has_one :denunciante
   has_one :operador
   
+  after_create :enviar_email_de_confirmacao_de_cadastro
+  
   validates :nome, :presence => true
   
   #TODO: refatorar para realocar parte desses métodos para a classe Operador
@@ -36,6 +38,10 @@ class Usuario < ActiveRecord::Base
       return true if (self.denunciante.situacao == Denunciante::CADASTRADO)
     end
     return false
+  end
+  
+  def enviar_email_de_confirmacao_de_cadastro
+    DengueAppMailer.conta_criada(self).deliver
   end
   
 end
