@@ -5,10 +5,21 @@ describe Usuario do
   let(:administrador) {(Factory.create :administrador).usuario}
   let(:moderador) {(Factory.create :moderador).usuario}
   let(:denunciante) {(Factory.create :denunciante_com_login).usuario}
+  let(:usuario) {Factory.build :usuario}
   
   describe "Relacionamentos" do
     it { should have_one :denunciante }
     it { should have_one :operador }
+  end
+  
+  describe "Validações" do
+    
+    describe "#nome" do
+      it "deve ser obrigatório" do
+        usuario.should validate_presence_of(:nome)
+      end
+    end
+    
   end
   
   describe "Métodos" do

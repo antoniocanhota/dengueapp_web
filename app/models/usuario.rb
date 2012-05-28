@@ -13,6 +13,8 @@ class Usuario < ActiveRecord::Base
   has_one :denunciante
   has_one :operador
   
+  validates :nome, :presence => true
+  
   #TODO: refatorar para realocar parte desses métodos para a classe Operador
   def administrador?
     if self.operador

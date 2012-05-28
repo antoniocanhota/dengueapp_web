@@ -14,6 +14,17 @@ describe Operador do
     it { should belong_to :usuario }
   end
   
+  describe "Validações" do
+    
+    describe "#usuario_id" do
+      it "deve ser único" do
+        operador.save
+        Operador.new.should validate_uniqueness_of(:usuario_id)
+      end
+    end
+    
+  end
+  
   describe "Escopos" do
     
     
@@ -160,6 +171,31 @@ describe Operador do
       end
     end
 
+    describe "#verificar_existencia_do_usuario" do
+      it "deve criar um novo usuário se o e-mail/usuário já não existir" do
+        novo_usuario_moderador = Factory.create :moderador
+        Operador.last.usuario_id = novo_usuario_moderador.usuario.id
+      end
+      it "não deve criar um novo usuáro se o e-mail/usuário já existir" do
+        usuario_existente = Factory.create :usuario, :email => 'existente@mail.com'
+        novo_usuario_moderador = Factory.build :moderador, :usuario => (Factory.build :usuario, :email => 'existente@mail.com')
+        novo_usuario_moderador.save
+        Operador.last.usuario_id = usuario_existente.id
+      end
+      it "deve atualizar o nome (quando for valido) se o e-mail/usuário já existir" do
+        usuario_existente = Factory.create :usuario, :email => 'existente@mail.com', :nome => 'Fulano de Nome Antigo'
+        novo_usuario_moderador = Factory.build :moderador, :usuario => (Factory.build :usuario, :email => 'existente@mail.com', :nome => 'Fulano de Nome Novo')
+        novo_usuario_moderador.save
+        Usuario.find(usuario_existente.id).nome.should == 'Fulano de Nome Novo'
+      end
+      it "não deve atualizar o nome (quando for invalido) se o e-mail/usuário já existir" do
+        usuario_existente = Factory.create :usuario, :email => 'existente@mail.com', :nome => 'Fulano de Nome Antigo'
+        novo_usuario_moderador = Factory.build :moderador, :usuario => (Factory.build :usuario, :email => 'existente@mail.com', :nome => '')
+        novo_usuario_moderador.save
+        novo_usuario_moderador.usuario.should have(1).error_on :nome
+      end
+    end
+    
     describe "#moderador?" do
       context "deve retornar verdadeiro quando" do
         it "é do tipo MODERADOR" do

@@ -9,9 +9,12 @@ class Operador < ActiveRecord::Base
   
   belongs_to :usuario
 
+  validates :usuario_id, :uniqueness => true
+  
   accepts_nested_attributes_for :usuario
   
   before_create :atribuir_valores_iniciais
+  before_validation :verificar_existencia_do_usuario, :on => :create
   
   scope :administradores, where("tipo = '#{Operador::ADMINISTRADOR}' and (situacao = '#{Operador::ATIVO}' or situacao = '#{Operador::PRECADASTRADO}')")
   scope :administradores_inclusive_inativos, where("tipo = '#{Operador::ADMINISTRADOR}' and (situacao = '#{Operador::ATIVO}' or situacao = '#{Operador::PRECADASTRADO}' or situacao = '#{Operador::INATIVO}')")
@@ -22,6 +25,14 @@ class Operador < ActiveRecord::Base
   
   def atribuir_valores_iniciais
     self.situacao = Operador::ATIVO if self.situacao.blank?
+  end
+  
+  def verificar_existencia_do_usuario
+    usuario_existente = Usuario.find_by_email(self.usuario.email)
+    if usuario_existente
+      usuario_existente.nome = self.usuario.nome
+      self.usuario = usuario_existente
+    end
   end
   
   def moderador?
