@@ -2,7 +2,7 @@ Dado /^que eu esteja logado como um (.+)$/ do |tipo_de_usuario|
   step "que exista um #{tipo_de_usuario}"
   step "que eu esteja na página inicial"
   fill_in('usuario_email', :with => @usuario.email)
-  fill_in('usuario_password', :with => @usuario.password)
+  fill_in('usuario_password', :with => 'qwerty123')
   click_button "Acessar"
 end
 

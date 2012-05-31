@@ -32,6 +32,24 @@ describe Denuncia do
       end
     end
     
+    describe "#canceladas" do
+      it "deve retornar apenas denúncias canceladas" do
+        Denuncia.canceladas.should_not include denuncia_ativa
+        Denuncia.canceladas.should_not include denuncia_rejeitada
+        Denuncia.canceladas.should include denuncia_cancelada
+        Denuncia.canceladas.should_not include denuncia_resolvida
+      end
+    end
+    
+    describe "#resolvidas" do
+      it "deve retornar apenas denúncias resolvidas" do
+        Denuncia.resolvidas.should_not include denuncia_ativa
+        Denuncia.resolvidas.should_not include denuncia_rejeitada
+        Denuncia.resolvidas.should_not include denuncia_cancelada
+        Denuncia.resolvidas.should include denuncia_resolvida
+      end
+    end
+    
   end
   
   describe "Métodos" do

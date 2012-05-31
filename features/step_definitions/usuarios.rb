@@ -22,18 +22,16 @@ Quando /^eu preencho meu e\-mail e senha de (.+)$/ do |tipo_de_usuario|
   case tipo_de_usuario
   when /^administrador$/
     fill_in('usuario_email', :with => @administrador.email)
-    fill_in('usuario_password', :with => @administrador.password)
   when /^moderador/
     fill_in('usuario_email', :with => @moderador.email)
-    fill_in('usuario_password', :with => @moderador.password)
   when /^denunciante/
     fill_in('usuario_email', :with => @denunciante.email)
-    fill_in('usuario_password', :with => @denunciante.password)
   end
+  fill_in('usuario_password', :with => 'qwerty123')
   click_button('Acessar')
 end
 
-Então /^eu devo ver o (.+)/ do |tipo_de_usuario|
+Então /^eu devo ver o usuário (.+)/ do |tipo_de_usuario|
   case tipo_de_usuario
   when /^administrador$/
     dados_do_usuario = @administrador
@@ -51,7 +49,7 @@ Então /^eu devo ver o (.+)/ do |tipo_de_usuario|
   step("eu devo ver '#{dados_do_usuario.email}'")
 end
 
-Então /^eu não devo ver o (.+)/ do |tipo_de_usuario|
+Então /^eu não devo ver o usuário (.+)/ do |tipo_de_usuario|
   case tipo_de_usuario
   when /^administrador$/
     dados_do_usuario = @administrador

@@ -13,6 +13,8 @@ class Denuncia < ActiveRecord::Base
   
   scope :ativas, where(:situacao => Denuncia::ATIVA)
   scope :rejeitadas, where(:situacao => Denuncia::REJEITADA)
+  scope :canceladas, where(:situacao => Denuncia::CANCELADA)
+  scope :resolvidas, where(:situacao => Denuncia::RESOLVIDA)
   
   def gmaps4rails
     "#{self.latitude},#{self.longitude}"

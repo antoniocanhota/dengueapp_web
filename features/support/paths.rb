@@ -21,12 +21,24 @@ module NavigationHelpers
     when /^página inicial de denunciante$/
       home_denunciante_path
       
-    when /página de gerenciamento de denúncias/
-      denuncias_path
+    when /^página de gerenciamento de denúncias$/
+      ativas_denuncias_path
+      
+    when /^página de gerenciamento de denúncias ativas$/
+      ativas_denuncias_path
+      
+    when /^página de gerenciamento de denúncias rejeitadas$/
+      rejeitadas_denuncias_path
+      
+    when /^página de gerenciamento de denúncias canceladas$/
+      canceladas_denuncias_path
+      
+    when /^página de gerenciamento de denúncias resolvidas$/
+      resolvidas_denuncias_path
       
     when /página de detalhes da denúncia na coordenada "(.*)","(.*)"/
       denuncia_path(Denuncia.find_by_latitude_and_longitude($1,$2))
-
+      
     when /página das minhas denúncias/
       minhas_denuncias_path
       

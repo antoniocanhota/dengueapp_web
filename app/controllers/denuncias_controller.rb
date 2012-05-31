@@ -1,16 +1,38 @@
 class DenunciasController < ApplicationController
+  
   before_filter :authenticate_usuario!
   load_and_authorize_resource
   
-  # GET /denuncias
-  # GET /denuncias.json
-  def index
-    @denuncias = Denuncia.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @denuncias }
+  def ativas
+    @denuncias = Denuncia.ativas.to_gmaps4rails do |denuncia,marker|
+      marker.infowindow render_to_string(:partial => 'info_window', :locals => {:denuncia => denuncia})  
     end
+    render 'index'
+  end
+  
+  def rejeitadas
+    @denuncias = Denuncia.rejeitadas.to_gmaps4rails do |denuncia,marker|
+      marker.infowindow render_to_string(:partial => 'info_window', :locals => {:denuncia => denuncia})  
+    end
+    render 'index'
+  end
+  
+  def canceladas
+    @denuncias = Denuncia.canceladas.to_gmaps4rails do |denuncia,marker|
+      marker.infowindow render_to_string(:partial => 'info_window', :locals => {:denuncia => denuncia})  
+    end
+    render 'index'
+  end
+  
+  def resolvidas
+    @denuncias = Denuncia.resolvidas.to_gmaps4rails do |denuncia,marker|
+      marker.infowindow render_to_string(:partial => 'info_window', :locals => {:denuncia => denuncia})  
+    end
+    render 'index'
+  end
+  
+  def index
+    redirect_to ativas_denuncias_path
   end
 
   # GET /minhas_denuncias
@@ -26,14 +48,10 @@ class DenunciasController < ApplicationController
     
   end
   
-  # GET /denuncias/1
-  # GET /denuncias/1.json
   def show
     @denuncia = Denuncia.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @denuncia }
+    @marcador =  @denuncia.to_gmaps4rails do |denuncia,marker|
+      marker.infowindow render_to_string(:partial => 'info_window', :locals => {:denuncia => denuncia})  
     end
   end
 
@@ -96,4 +114,5 @@ class DenunciasController < ApplicationController
       format.json { head :ok }
     end
   end
+  
 end
