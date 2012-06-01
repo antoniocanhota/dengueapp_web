@@ -11,29 +11,29 @@ Contexto:
 
 Cenário: Mostrar os moderadores, por padrão, em gerenciamento de operadores
     Dado que eu esteja na página de gerenciamento de operadores
-    Então eu devo ver o moderador
-    E eu não devo ver o administrador
+    Então eu devo ver o usuário moderador
+    E eu não devo ver o usuário administrador
 
 Cenário: Listar moderadores ativos ou pré-cadastrados
     Dado que eu esteja na página de gerenciamento de operadores
     Quando eu clico em 'Moderadores'
-    Então eu não devo ver o administrador
-    E eu devo ver o moderador
+    Então eu não devo ver o usuário administrador
+    E eu devo ver o usuário moderador
 
 Cenário: Listar administradores ativos ou pré-cadastrados
     Dado que eu esteja na página de gerenciamento de operadores
     Quando eu clico em 'Administradores'
-    Então eu não devo ver o moderador
-    E eu devo ver o administrador
+    Então eu não devo ver o usuário moderador
+    E eu devo ver o usuário administrador
 
 Cenário: Listar moderadores inativos
     Dado que eu esteja na página de gerenciamento de operadores
     E que exista um moderador inativo
     Quando eu clico em 'Moderadores'
-    E eu devo ver o moderador inativo
+    E eu devo ver o usuário moderador inativo
 
 Cenário: Listar administradores inativos
     Dado que eu esteja na página de gerenciamento de operadores
     E que exista um administrador inativo
     Quando eu clico em 'Administradores'
-    Então eu devo ver o administrador inativo
+    Então eu devo ver o usuário administrador inativo

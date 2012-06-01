@@ -11,7 +11,7 @@ FactoryGirl.define do
   
   factory :usuario do
     nome { Factory.next(:nome) }
-    password "123abc"
+    password "qwerty123"
     email { Factory.next(:email) }
     
   end

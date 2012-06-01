@@ -11,21 +11,21 @@
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  <body>
+  <body style="min-height:600px; height: 100%">
     <div class="container-fluid">
       <%= render "layouts/navbar" %>
       <!-- MENSAGENS FLASH -->
-          <% flash.each do |type, message| -%>
-            <% type = "info" if type == :notice %>
-            <div class="alert alert-<%= type %>">
-              <a class="close" data-dismiss="alert" href="#">x</a>
-              <%= message %>
-            </div>
-          <% end %>
-          <!-- CONTEUDO DA PAGINA -->
-          <%= yield %>
-          <%= yield :scripts %>
-      </div>
+      <% flash.each do |type, message| -%>
+        <% type = "info" if type == :notice %>
+        <div class="alert alert-<%= type %>">
+          <a class="close" data-dismiss="alert" href="#">x</a>
+          <%= message %>
+        </div>
+      <% end %>
+      <!-- CONTEUDO DA PAGINA -->
+      <%= yield %>
+      <%= yield :scripts %>
     </div>
-  </body>
+  </div>
+</body>
 </html>

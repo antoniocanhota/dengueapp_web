@@ -8,6 +8,11 @@ class Ability
     if usuario.administrador?
       can :administrador, :home
       can :index, Denuncia
+      can :ativas, Denuncia
+      can :rejeitadas, Denuncia
+      can :canceladas, Denuncia
+      can :resolvidas, Denuncia
+      can :show, Denuncia
       can :index, Operador
       can :administradores, Operador
       can :moderadores, Operador
@@ -17,6 +22,11 @@ class Ability
       can :ativar, Operador
       can :desativar, Operador
     elsif usuario.moderador?
+      can :ativas, Denuncia
+      can :rejeitadas, Denuncia
+      can :canceladas, Denuncia
+      can :resolvidas, Denuncia
+      can :show, Denuncia
       can :moderador, :home
       can :index, Denuncia
     elsif usuario.denunciante?
