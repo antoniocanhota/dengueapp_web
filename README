@@ -1,10 +1,10 @@
-# DengueApp
+h1. DengueApp
 
-## Sobre a aplicação
+h3. Sobre a aplicação
 
 Esta aplicação faz parte de um trabalho de conclusão do curso de Ciência da Computação pela Universidade Federal Fluminense.
 
-## Guia Rápido
+h3. Guia Rápido
 
 É aconselhável um breve conhecimento sobre o framework Ruby on Rails antes de prosseguir. Também é recomendável utilizar o RVM - mais informações em <https://rvm.io//>.
 
@@ -22,7 +22,7 @@ Com isso, sua aplicação estará pronta para ser executada. Para inicalizar o s
 
 A aplicação ficará disponível em <http://localhost:3000/>
 
-## Problemas Comuns
+h3. Problemas Comuns
 
 Caso tenha problemas ao instalar o MySQL no OSX, veja <http://www.alishabdar.com/2011/03/22/running-mysql-5-5-and-rails-3-on-mac-os-x/>.
 
