@@ -25,6 +25,34 @@ class Denuncia < ActiveRecord::Base
     self.data_e_hora = Time.now if self.data_e_hora.blank?
   end
   
+  def ativa?
+    return true if self.situacao == Denuncia::ATIVA
+  end
+  
+  def reativavel?
+    return true if self.rejeitada?
+  end
+  
+  def reativar
+    if self.reativavel?
+      self.update_attribute(:situacao,Denuncia::ATIVA)
+    else
+      errors[:base] << "Somente denúncias com situação REJEITADA, CANCELADA ou RESOLVIDA podem ser reativadas."
+    end
+  end
+  
+  def rejeitada?
+    return true if self.situacao == Denuncia::REJEITADA
+  end
+  
+  def rejeitavel?
+    if self.situacao == Denuncia::ATIVA
+      return true
+    else
+      return false
+    end
+  end
+  
   def rejeitar
     if self.situacao == Denuncia::ATIVA
       self.update_attribute(:situacao,Denuncia::REJEITADA)
@@ -33,12 +61,20 @@ class Denuncia < ActiveRecord::Base
     end
   end
   
+  def cancelada?
+    return true if self.situacao == Denuncia::CANCELADA
+  end
+  
   def cancelar
     if self.situacao == Denuncia::ATIVA
       self.update_attribute(:situacao,Denuncia::CANCELADA)
     else
       errors[:base] << "Somente denúncias com situação ATIVA podem ser canceladas."
     end
+  end
+  
+  def resolvida?
+    return true if self.situacao == Denuncia::RESOLVIDA
   end
   
   def resolver

@@ -45,6 +45,8 @@
 
     <div class="form-actions">
       <%= link_to "Voltar para Gerenciamento de Denúncias", denuncias_path, :class => 'btn' %>
+      <%= (link_to "Rejeitar Denúncia", rejeitar_denuncia_path(@denuncia), :class => 'btn btn-danger', :confirm => "Você deseja rejeitar a denúncia ##{@denuncia.id}?") if @denuncia.rejeitavel? %>
+      <%= (link_to "Reativar Denúncia", reativar_denuncia_path(@denuncia), :class => 'btn btn-warning', :confirm => "Você deseja reativar a denúncia ##{@denuncia.id}?") if (@denuncia.reativavel? and can? :reativar, Denuncia) %>
     </div>
 
   </div>

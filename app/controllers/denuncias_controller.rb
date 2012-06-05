@@ -71,6 +71,24 @@ class DenunciasController < ApplicationController
     @denuncia = Denuncia.find(params[:id])
   end
 
+  def reativar
+    @denuncia = Denuncia.find(params[:id])
+    if @denuncia.reativar
+      redirect_to @denuncia, :notice => 'Denúncia reativada com sucesso.'
+    else
+      redirect_to @denuncia, :error => '"Erro ao reativar a denúncia.'
+    end
+  end
+  
+  def rejeitar
+    @denuncia = Denuncia.find(params[:id])
+    if @denuncia.rejeitar
+      redirect_to @denuncia, :notice => 'Denúncia rejeitada com sucesso.'
+    else
+      redirect_to @denuncia, :error => '"Erro ao rejeitar a denúncia.'
+    end
+  end
+  
   # POST /denuncias
   # POST /denuncias.json
   def create

@@ -78,6 +78,101 @@ describe Denuncia do
       end
     end
     
+    describe "#ativa?" do
+      context "deve retornar verdadeiro quando" do
+        it "é uma denúncia ativa" do
+          denuncia_ativa.ativa?.should be_true
+        end
+      end
+      context "deve retornar falso quando" do
+        it "é uma denúncia rejeitada" do
+          denuncia_rejeitada.ativa?.should be_false
+        end
+        it "é uma denúncia resolvida" do
+          denuncia_resolvida.ativa?.should be_false
+        end
+        it "é uma denúncia cancelada" do
+          denuncia_cancelada.ativa?.should be_false
+        end
+      end
+    end
+    
+    describe "#reativavel?" do
+      context "deve retornar verdadeiro quando" do
+        it "é uma denúncia rejeitada" do
+          denuncia_rejeitada.reativavel?.should be_true
+        end
+      end
+      context "deve retornar falso quando" do
+        it "é uma denúncia ativa" do
+          denuncia_ativa.reativavel?.should be_false
+        end
+        it "é uma denúncia resolvida" do
+          denuncia_resolvida.reativavel?.should be_false
+        end
+        it "é uma denúncia cancelada" do
+          denuncia_cancelada.reativavel?.should be_false
+        end
+      end
+    end
+    
+    describe "#reativar" do
+      it "deve reativar apenas uma denúncia rejeitada" do
+        denuncia_rejeitada.reativar
+        Denuncia.find(denuncia_rejeitada.id).situacao.should == Denuncia::ATIVA
+      end
+      it "não deve rejeitar uma denúncia ativa" do
+        denuncia_ativa.reativar
+        Denuncia.find(denuncia_ativa.id).situacao.should == Denuncia::ATIVA
+      end
+      it "não deve reativar uma denúncia cancelada" do
+        denuncia_cancelada.reativar
+        Denuncia.find(denuncia_cancelada.id).situacao.should == Denuncia::CANCELADA
+      end
+      it "não deve reativar uma denúncia resolvida" do
+        denuncia_resolvida.reativar
+        Denuncia.find(denuncia_resolvida.id).situacao.should == Denuncia::RESOLVIDA
+      end
+    end
+    
+    describe "#rejeitada?" do
+      context "deve retornar verdadeiro quando" do
+        it "é uma denúncia rejeitada" do
+          denuncia_rejeitada.rejeitada?.should be_true
+        end
+      end
+      context "deve retornar falso quando" do
+        it "é uma denúncia ativa" do
+          denuncia_ativa.rejeitada?.should be_false
+        end
+        it "é uma denúncia resolvida" do
+          denuncia_resolvida.rejeitada?.should be_false
+        end
+        it "é uma denúncia cancelada" do
+          denuncia_cancelada.rejeitada?.should be_false
+        end
+      end
+    end
+    
+    describe "#rejeitavel?" do
+      context "deve retornar verdadeiro quando" do
+        it "é uma denúncia ativa" do
+          denuncia_ativa.rejeitavel?.should be_true
+        end
+      end
+      context "deve retornar falso quando" do
+        it "é uma denúncia rejeitada" do
+          denuncia_rejeitada.rejeitavel?.should be_false
+        end
+        it "é uma denúncia cancelada" do
+          denuncia_cancelada.rejeitavel?.should be_false
+        end
+        it "é uma denúncia resolvida" do
+          denuncia_resolvida.rejeitavel?.should be_false
+        end
+      end
+    end
+    
     describe "#rejeitar" do
       it "deve rejeitar apenas uma denúncia ativa" do
         denuncia_ativa.rejeitar
