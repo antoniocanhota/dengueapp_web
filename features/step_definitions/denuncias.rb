@@ -1,22 +1,21 @@
-Dado /^que exista uma denúncia (.+) na coordenada "([^"]*)","([^"]*)"/ do |situacao,lat,lon|
+Dado /^que exista uma denúncia(| )(ativa|rejeitada|cancelada|resolvida|)( na coordenada '(.+)')?$/ do |ignorar_1,situacao,ignorar_2,coordenada|
+  if coordenada.nil?
+    lat = -22.9048188493015
+    lon = -43.13112258911133
+  else
+    lat = coordenada.split(',').first.to_f
+    lon = coordenada.split(',').second.to_f
+  end
   case situacao
-  when /^ativa$/
-    Factory.create :denuncia, :latitude => lat, :longitude => lon
   when /^rejeitada$/
     Factory.create :denuncia_rejeitada, :latitude => lat, :longitude => lon
   when /^cancelada$/
     Factory.create :denuncia_cancelada, :latitude => lat, :longitude => lon
   when /^resolvida$/
     Factory.create :denuncia_resolvida, :latitude => lat, :longitude => lon
+  else
+    Factory.create :denuncia, :latitude => lat, :longitude => lon
   end
-end
-
-Então /^eu devo ver os detalhes (.+) da denúncia "([^"]*)","([^"]*)"$/ do |visibilidade,lat,lon|
-#  denuncia = Denuncia.find_by_latitude_and_longitude(lat,lon)
-#  case visibilidade
-#  when /^públicos/
-#    step("eu devo ver ")
-#  end
 end
 
 Então /^eu devo ver o número identificador da denúncia$/ do
@@ -28,6 +27,15 @@ Então /^eu devo ver a data em que a denúncia foi feita$/ do
 end
 
 Então /^eu devo ver a situação da denúncia$/ do
-  pending # express the regexp above with the code you wish you had
+  situacao_codificada = Denuncia.last.situacao
+  case situacao_codificada
+  when Denuncia::ATIVA
+    step("eu devo ver 'Ativa'")
+  when Denuncia::CANCELADA
+    step("eu devo ver 'Cancelada'")
+  when Denuncia::REJEITADA
+    step("eu devo ver 'Rejeitada'")
+  when Denuncia::RESOLVIDA
+    step("eu devo ver 'Resolvida'")
+  end
 end
-

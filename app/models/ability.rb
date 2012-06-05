@@ -13,6 +13,8 @@ class Ability
       can :canceladas, Denuncia
       can :resolvidas, Denuncia
       can :show, Denuncia
+      can :reativar, Denuncia
+      can :rejeitar, Denuncia#, :situacao => Denuncia::ATIVA
       can :index, Operador
       can :administradores, Operador
       can :moderadores, Operador
@@ -27,6 +29,7 @@ class Ability
       can :canceladas, Denuncia
       can :resolvidas, Denuncia
       can :show, Denuncia
+      can :rejeitar, Denuncia
       can :moderador, :home
       can :index, Denuncia
     elsif usuario.denunciante?

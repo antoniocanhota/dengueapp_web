@@ -21,6 +21,8 @@ Dengueapp::Application.routes.draw do
     get 'moderadores', :on => :collection
   end
 
+  match 'denuncias/:id/rejeitar' => 'denuncias#rejeitar', :as => "rejeitar_denuncia"
+  match 'denuncias/:id/reativar' => 'denuncias#reativar', :as => "reativar_denuncia"
   resources :denuncias do
     get 'ativas', :on => :collection
     get 'rejeitadas', :on => :collection

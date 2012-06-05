@@ -35,9 +35,17 @@ module NavigationHelpers
       
     when /^página de gerenciamento de denúncias resolvidas$/
       resolvidas_denuncias_path
-      
+
+    when /^página de gerenciamento de denúncias resolvidas$/
+      resolvidas_denuncias_path
+
     when /página de detalhes da denúncia na coordenada "(.*)","(.*)"/
       denuncia_path(Denuncia.find_by_latitude_and_longitude($1,$2))
+      
+    when /^página de detalhes da denúncia (.*)$/
+      if $1 == "recém cadastrado" or $1 == "acima"
+        denuncia_path(Denuncia.last)
+      end
       
     when /página das minhas denúncias/
       minhas_denuncias_path

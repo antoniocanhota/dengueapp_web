@@ -7,10 +7,9 @@ Funcionalidade: Detalhar uma denúncia qualquer
 
 Contexto:
     Dado que eu esteja logado como um administrador
-    E que exista uma denúncia ativa na coordenada "-22.5","-44.5"
+    E que exista uma denúncia ativa na coordenada '-22.5,-44.5'
     E que eu esteja na página de detalhes da denúncia na coordenada "-22.5","-44.5"
 
-@wip
 Cenário: Visualizar detalhes da denúncia
     Então eu devo ver o número identificador da denúncia
     E eu devo ver a data em que a denúncia foi feita
