@@ -1,4 +1,4 @@
-o: ActiveSupport::Cache::Entry	:@value{	"lengthi²"_version"%0b237f4ba95cf6a9ccd6b884d3c6d00c"source"²/*
+o: ActiveSupport::Cache::Entry	:@compressedF:@value{	"_version"%8d359efb5ef9b27bfc0d55550931f1e7"digest"%0b3c452dc9463d410a82ab45508446e1"lengthiä"source"ä/*
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
@@ -7459,8 +7459,20 @@ li[class*=" icon-"].icon-large:before {
   -webkit-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
   -moz-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
   box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px;
-  width: 100%;
-  height: 550px;
+  width: auto;
+  height: 100%;
+}
+
+.map_mini_container {
+  padding: 6px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ccc #ccc #999 #ccc;
+  -webkit-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
+  -moz-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
+  box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px;
+  width: auto;
+  height: 100%;
 }
 
 .gmaps4rails_map {
@@ -7555,4 +7567,4 @@ div.field, div.actions {
   font-size: 12px;
   list-style: square;
 }
-"digest"%0b855962bfb14c1c324c9751a4884fa8:@created_atf1337998850.572077 œé:@expires_in0:@compressedF
+:@created_atf1338584013.1543391 à±:@expires_in0
