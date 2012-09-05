@@ -1,0 +1,54 @@
+<div class="row-fluid">
+  <%= render "menu" %>
+  <div class="span10">
+    <%- model_class = @denuncia.class -%>
+    <div class="page-header">
+      <h1>Detalhes da Denúncia #<%= @denuncia.id %></h1>
+    </div>
+    <div class="row-fluid">
+      <div class="span4">
+        <dl class="dl-horizontal">
+          <%= exibir_dado("Data e Hora", @denuncia.data_e_hora) %>
+          <%= exibir_dado("Situação",decodificar(@denuncia.situacao)) %>
+        </dl>
+        <hr />
+        <h4>Outras Denúncias do Mesmo Usuário</h4><br />
+        <table class="table table-condensed table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Data e Hora</th>
+              <th>Situação</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>…</td>
+              <td>…</td>
+              <td>…</td>
+              <td>…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="span4">
+        <a href="#" class="thumbnail">
+          <img src="http://1.bp.blogspot.com/_17PLUG6gSR8/S702ayUyVMI/AAAAAAAAAGg/JFZejUFDRk0/s1600/Quadra+foco+de+dengue.JPG" alt="">
+        </a>
+      </div>
+      <div class="span4" style="height:280px">
+        <%= mapa_pontual(@marcador) %>
+      </div>
+    </div>
+
+
+    <div class="form-actions">
+      <%= link_to "Voltar para Gerenciamento de Denúncias", denuncias_path, :class => 'btn' %>
+      <%= (link_to "Rejeitar Denúncia", rejeitar_denuncia_path(@denuncia), :class => 'btn btn-danger', :confirm => "Você deseja rejeitar a denúncia ##{@denuncia.id}?") if @denuncia.rejeitavel? %>
+      <%= (link_to "Reativar Denúncia", reativar_denuncia_path(@denuncia), :class => 'btn btn-warning', :confirm => "Você deseja reativar a denúncia ##{@denuncia.id}?") if (@denuncia.reativavel? and can? :reativar, Denuncia) %>
+    </div>
+
+  </div>
+</div>
+

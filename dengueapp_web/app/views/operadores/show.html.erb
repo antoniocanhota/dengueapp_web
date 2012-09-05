@@ -1,0 +1,26 @@
+<div class="row-fluid">
+  <%= render "menu" %>
+  <div class="span10">
+    <%- model_class = @operador.class -%>
+    <div class="page-header">
+      <h1>Detalhes do Operador #<%= @operador.id %></h1>
+    </div>
+    <dl class="dl-horizontal">
+      <dt>Nome</dt>
+      <dd><%= @operador.usuario.nome %></dd>
+      <dt>E-mail</dt>
+      <dd><%= @operador.usuario.email %></dd>
+      <dt><%= model_class.human_attribute_name(:tipo) %></dt>
+      <dd><%= decodificar(@operador.tipo) %></dd>
+      <dt><%= model_class.human_attribute_name(:situacao) %></dt>
+      <dd><%= decodificar(@operador.situacao) %></dd>
+    </dl>
+    <div class="form-actions">
+      <%= link_to "Voltar para Gerenciamento de Operadores", operadores_path, :class => 'btn' %>
+      <%= (link_to "Ativar Operador", ativar_operador_path(@operador), :class => 'btn btn-warning', :confirm => "Você deseja ativar o perfil de #{decodificar(@operador.tipo)} do(a) usuário(a) #{exibir_primeiro_nome(@operador.usuario.nome)}?") if @operador.ativavel? %>
+      <%= (link_to "Desativar Operador", desativar_operador_path(@operador), :class => 'btn btn-danger', :confirm => "Você deseja desativar o perfil de #{decodificar(@operador.tipo)} do(a) usuário(a) #{exibir_primeiro_nome(@operador.usuario.nome)}?") if @operador.desativavel? %>
+    </div>
+  </div>
+</div>
+
+

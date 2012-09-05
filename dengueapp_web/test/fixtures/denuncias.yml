@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  data_e_hora: 2012-05-01 15:29:57
+  latitude: 1.5
+  longitude: 1.5
+  situacao: 1
+
+two:
+  data_e_hora: 2012-05-01 15:29:57
+  latitude: 1.5
+  longitude: 1.5
+  situacao: 1

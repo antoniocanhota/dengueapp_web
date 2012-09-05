@@ -1,0 +1,19 @@
+<div class="span2">
+  <ul class="nav nav-list">
+    <li class="nav-header">
+      Denúncias
+    </li>
+    <li class="<%= is_active?(ativas_denuncias_path) %>">
+      <%= link_to "Ativas", ativas_denuncias_path %>
+    </li>
+    <li class="<%= is_active?(rejeitadas_denuncias_path) %>">
+      <%= link_to "Rejeitadas", rejeitadas_denuncias_path %>
+    </li>
+    <li class="<%= is_active?(canceladas_denuncias_path) %>">
+      <%= link_to "Canceladas", canceladas_denuncias_path %>
+    </li>
+    <li class="<%= is_active?(resolvidas_denuncias_path) %>">
+      <%= link_to "Resolvidas", resolvidas_denuncias_path %>
+    </li>
+  </ul>
+</div>
