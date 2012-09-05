@@ -35,6 +35,7 @@ class Ability
     elsif usuario.denunciante?
       can :denunciante, :home
       can :minhas_denuncias, Denuncia
+      can :validar, Denunciante
     end
 
     # The first argument to `can` is the action you are giving the user permission to do.

@@ -3,6 +3,7 @@
     <div class="container-fluid">
       <!-- LINKS -->
       <%= link_to "Dengueapp", root_path, :class => "brand" %>
+      <div class="nav-collapse collapse" style="height: 0px;">
       <ul class="nav">
         <% if usuario_atual %>
           <li><%= (link_to "Gerenciar Denúncias", denuncias_path) if can? :index, Denuncia %></li>
@@ -23,6 +24,7 @@
           <%= f.submit "Acessar" %>
         <% end %>
       <% end %>
+      </div>
     </div>
   </div>
 </div>

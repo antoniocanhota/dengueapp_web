@@ -99,3 +99,14 @@ Então /^o botão de (.+) operador não deve estar disponível$/ do |acao|
   end
 end
 
+Quando /^eu preencho os campos necessários para a criação de uma nova conta de denunciante$/ do
+  @denunciante = Factory.create :denunciante
+  @usuario = Factory.build :usuario
+  #binding.pry
+  fill_in('usuario_nome', :with => @usuario.nome)
+  fill_in('usuario_telefone_do_denunciante', :with => @denunciante.telefone)
+  #fill_in('usuario_email', :with => @usuario.email)
+  fill_in('usuario_email', :with => 'oitelecom@oi.com.br')
+  fill_in('usuario_password', :with => @usuario.password)
+  fill_in('usuario_password_confirmation', :with => @usuario.password)
+end

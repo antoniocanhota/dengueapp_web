@@ -11,7 +11,7 @@ module NavigationHelpers
       
     when /^página inicial$/
       '/'
-      
+
     when /^página inicial de administrador$/
       home_administrador_path
       
@@ -56,13 +56,21 @@ module NavigationHelpers
     when /^página de cadastro de operador$/
       new_operador_path
       
+    when /^página de validação do denunciante do usuário acima$/
+      validar_denunciante_path(Usuario.last.denunciante.id)
+      
     when /^página de detalhes do operador (.*)$/
       if $1 == "recém cadastrado" or $1 == "acima"
         operador_path(Operador.last)
       else
         operador_path($1)
       end
+
+    when /^página de login$/   
+      new_usuario_session_path
       
+    when /^página de criação de conta de usuário$/
+      new_usuario_registration_path
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
       #

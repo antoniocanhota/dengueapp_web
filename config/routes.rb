@@ -11,6 +11,8 @@ Dengueapp::Application.routes.draw do
   match "acesso_negado" => "application#acesso_negado", :as => "acesso_negado"
   
   match "minhas_denuncias" => "denuncias#minhas_denuncias", :as => "minhas_denuncias"
+  
+  match "webservices/denuncias" => "webservices#denuncias", :as => "webservice_denuncias"
 
   devise_for :usuarios
   

@@ -6,4 +6,8 @@ class PublicController < ApplicationController
     end
   end
 
+  def login
+    
+  end
+  
 end

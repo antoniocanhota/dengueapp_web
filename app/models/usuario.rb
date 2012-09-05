@@ -40,6 +40,13 @@ class Usuario < ActiveRecord::Base
     return false
   end
   
+  def telefone_do_denunciante
+  end
+  
+  def telefone_do_denunciante=(data)
+    #Denunciante.find_by_telefone(data)
+  end
+  
   def enviar_email_de_confirmacao_de_cadastro
     DengueAppMailer.conta_criada(self).deliver
   end
