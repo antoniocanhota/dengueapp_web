@@ -13,6 +13,8 @@ Dengueapp::Application.routes.draw do
   match "minhas_denuncias" => "denuncias#minhas_denuncias", :as => "minhas_denuncias"
   
   match "webservices/denuncias" => "webservices#denuncias", :as => "webservice_denuncias"
+  
+  match "webservices/denuncias/publicar" => "webservices#publicar_denuncia", :as => "webservice_publicar_denuncia", :via => :post
 
   devise_for :usuarios
   
