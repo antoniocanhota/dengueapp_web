@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  telefone: MyString
-  situacao: 1
-
-two:
-  telefone: MyString
-  situacao: 1
