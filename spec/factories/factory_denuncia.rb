@@ -5,8 +5,9 @@ FactoryGirl.define do
     latitude "-22.906351"
     longitude "-43.133343"
     situacao Denuncia::ATIVA
-    association :denunciante
-    
+    dispositivo { Factory.create(:dispositivo) }
+    denunciante { Factory.create(:denunciante) }
+       
     factory :denuncia_rejeitada do
       situacao Denuncia::REJEITADA
     end

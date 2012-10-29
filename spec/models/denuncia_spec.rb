@@ -9,6 +9,7 @@ describe Denuncia do
   let(:denuncia_resolvida) {Factory.create :denuncia_resolvida}
   
   describe "Relacionamentos" do
+    it { should belong_to :dispositivo }
     it { should belong_to :denunciante }
   end
   

@@ -10,10 +10,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120501184007) do
+ActiveRecord::Schema.define(:version => 20121028224812) do
 
   create_table "denunciantes", :force => true do |t|
-    t.string   "telefone"
     t.string   "situacao",   :limit => 4
     t.integer  "usuario_id"
     t.datetime "created_at"
@@ -28,6 +27,17 @@ ActiveRecord::Schema.define(:version => 20120501184007) do
     t.integer  "denunciante_id",              :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "dispositivo_id",              :null => false
+  end
+
+  create_table "dispositivos", :force => true do |t|
+    t.string   "numero_do_telefone"
+    t.string   "identificador_do_hardware"
+    t.string   "identificador_do_android"
+    t.string   "codigo_de_verificacao"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "denunciante_id",            :null => false
   end
 
   create_table "operadores", :force => true do |t|

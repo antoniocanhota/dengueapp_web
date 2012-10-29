@@ -2,8 +2,7 @@
 FactoryGirl.define do
   factory :denunciante do
     
-    situacao Denunciante::CADASTRADO
-    telefone "+552123456789"
+    situacao Denunciante::CADASTRADO    
     
     factory :denunciante_com_login do
       association :usuario#, :email => "denunciante@mail.com"

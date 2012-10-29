@@ -5,7 +5,11 @@ class Denuncia < ActiveRecord::Base
   CANCELADA = "DNSC"
   RESOLVIDA = "DNSS"
   
+  belongs_to :dispositivo
   belongs_to :denunciante
+  
+  accepts_nested_attributes_for :denunciante
+  accepts_nested_attributes_for :dispositivo
   
   acts_as_gmappable :process_geocoding => false
   
@@ -15,6 +19,7 @@ class Denuncia < ActiveRecord::Base
   scope :rejeitadas, where(:situacao => Denuncia::REJEITADA)
   scope :canceladas, where(:situacao => Denuncia::CANCELADA)
   scope :resolvidas, where(:situacao => Denuncia::RESOLVIDA)
+  scope :do_denunciante, lambda{ |denunciante_id| where(:denunciante_id => denunciante_id) unless denunciante_id.blank? }
   
   def gmaps4rails
     "#{self.latitude},#{self.longitude}"

@@ -9,6 +9,7 @@ describe Denunciante do
   describe "Relacionamentos" do
     it { should belong_to :usuario }
     it { should have_many :denuncias }
+    it { should have_many :dispositivos }
   end
   
   describe "Métodos" do

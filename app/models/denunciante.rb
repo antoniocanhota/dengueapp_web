@@ -6,6 +6,7 @@ class Denunciante < ActiveRecord::Base
   
   belongs_to :usuario
   has_many :denuncias
+  has_many :dispositivos
   
   accepts_nested_attributes_for :usuario
   
