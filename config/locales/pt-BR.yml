@@ -214,6 +214,15 @@ pt-BR:
       usuario: "Usuário"
     attributes:
       usuario:
+        nome: "Nome"
         email: "E-mail"
+        password: "Senha"
+        password_confirmation: "Confirmação da Senha"
+        numero_do_telefone: "Telefone"
+        identificador_do_hardware: "IMEI"
+        codigo_de_verificacao: "Código de Verificação"
     errors:
-      <<: *errors
+      models:
+        usuario:
+          numero_de_telefone_e_identificador_de_hardware_em_branco: "Deve ser informado um número de telefone ou IMEI"
+          dispositivo_nao_encontrado: "Não foi encontrado um dispositivo com os dados informados"

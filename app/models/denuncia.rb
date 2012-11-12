@@ -89,5 +89,5 @@ class Denuncia < ActiveRecord::Base
       errors[:base] << "Somente denúncias com situação ATIVA podem ser resolvidas."
     end
   end
-  
+ 
 end

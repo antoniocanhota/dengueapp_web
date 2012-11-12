@@ -15,7 +15,7 @@ development:
   database: dengueapp_development
   pool: 5
   username: root
-  password: 
+  password: tzzk7662
   #socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -28,7 +28,7 @@ test: &test
   database: dengueapp_test
   pool: 5
   username: root
-  password: 
+  password: tzzk7662
 
 production:
   adapter: mysql2

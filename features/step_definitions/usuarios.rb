@@ -76,6 +76,7 @@ Quando /^eu preencho os dados de um novo (.+) corretamente/ do |tipo_de_usuario|
   fill_in('operador_usuario_attributes_nome', :with => "C_USUARIO_#{numero_aleatorio}")
   fill_in('operador_usuario_attributes_email', :with => "c_usuario_#{numero_aleatorio}@mail.com")
 end
+
 Então /^eu devo ver os dados do operador (.+)$/ do |id|
   if id == "recém cadastrado"
     op = Operador.last

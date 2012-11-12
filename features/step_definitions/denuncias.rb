@@ -18,15 +18,15 @@ Dado /^que exista uma denúncia(| )(ativa|rejeitada|cancelada|resolvida|)( na co
   end
 end
 
-Então /^eu devo ver o número identificador da denúncia$/ do
+Então /^eu devo ver o número identificador da den�ncia$/ do
   step("eu devo ver '##{Denuncia.last.id}'")
 end
 
-Então /^eu devo ver a data em que a denúncia foi feita$/ do
+Então /^eu devo ver a data em que a den�ncia foi feita$/ do
   step("eu devo ver '#{I18n.l Denuncia.last.data_e_hora}'")
 end
 
-Então /^eu devo ver a situação da denúncia$/ do
+Então /^eu devo ver a situa��o da den�ncia$/ do
   situacao_codificada = Denuncia.last.situacao
   case situacao_codificada
   when Denuncia::ATIVA

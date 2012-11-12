@@ -27,7 +27,7 @@ Então /^eu devo ver '([^"]*)'$/ do |mensagem|
   end
 end
 
-Então /^eu não devo ver '([^"]*)'$/ do |texto|
+Então /^eu n�o devo ver '([^"]*)'$/ do |texto|
   if page.respond_to? :should
     page.should have_no_content(texto)
   else
@@ -35,7 +35,7 @@ Então /^eu não devo ver '([^"]*)'$/ do |texto|
   end
 end
 
-Então /^mostre-me a página$/ do
+Então /^mostre-me a p�gina$/ do
   save_and_open_page
 end
 
@@ -46,4 +46,3 @@ end
 Quando /^eu aperto "Cancelar" no pop-up de confirmação$/ do
   page.driver.browser.switch_to.alert.dismiss
 end
-

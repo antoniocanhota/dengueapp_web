@@ -1,18 +1,76 @@
-<h2>Sign in</h2>
+<div class="row-fluid">
+	<div class="span1">
+		&nbsp;
+	</div>
+	<div class="span4">
+		<div class="page-header">
+			<h1>Já sou cadastrado</h1>
+		</div>
+		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal"}) do |f| %>
+		<div class="control-group">
+			<%= f.label :email, :class => "control-label"%>
+			<div class="controls">
+				<%= f.email_field :email %>
+			</div>
+		</div>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-    <%= f.email_field :email %></div>
+		<div class="control-group">
+			<%= f.label :password, :class => "control-label" %>
+			<div class="controls">
+				<%= f.password_field :password %>
+			</div>
+		</div>
 
-  <div><%= f.label :password %><br />
-    <%= f.password_field :password %></div>
+		<% if devise_mapping.rememberable? -%>
+		<div>
+			<%= f.check_box :remember_me %> <%= f.label :remember_me %>
+		</div>
+		<% end -%>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+		<div class="control-group">
+			<div class="controls">
+				<%= f.submit "Sign in", :class => "btn btn-success btn-large"  %>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+				<%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+				<%= link_to "Forgot your password?", new_password_path(resource_name) %>
+				<br />
+				<% end -%>
+				<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+				<%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %>
+				<br />
+				<% end -%>
 
-  <div><%= f.submit "Sign in" %></div>
-<% end %>
+				<%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+				<%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %>
+				<br />
+				<% end -%>
 
-<%= link_to "Não Possuo Conta de Usuário", new_usuario_registration_path %>
-<%= render :partial => "devise/shared/links" %>
+				<%- if devise_mapping.omniauthable? %>
+				<%- resource_class.omniauth_providers.each do |provider| %>
+				<%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %>
+				<br />
+				<% end -%>
+				<% end -%>		
+			</div>
+		</div>
+		<% end %>
+
+	</div>
+	<div class="span2">
+		&nbsp;
+	</div>
+	<div class="span4">
+		<div class="page-header">
+			<h1>Quero me cadastrar</h1>
+		</div>
+		
+		<%= render :partial => "devise/registrations/form" %>
+
+	</div>
+	<div class="span1">
+		&nbsp;
+	</div>
+</div>

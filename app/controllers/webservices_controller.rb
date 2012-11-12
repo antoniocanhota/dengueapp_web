@@ -32,4 +32,9 @@ class WebservicesController < ApplicationController
     end
   end
   
+  def registro_do_dispositivo
+    dispositivo = Dispositivo.find_by_identificador_do_android(params[:identificador_do_android])
+    render :xml => dispositivo, :only => [:codigo_de_verificacao, :identificador_do_hardware, :numero_do_telefone]
+  end
+  
 end
