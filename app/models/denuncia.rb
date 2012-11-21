@@ -1,3 +1,6 @@
+#!/bin/env ruby
+# encoding: utf-8
+
 class Denuncia < ActiveRecord::Base
   
   ATIVA = "DNSA"
@@ -7,6 +10,7 @@ class Denuncia < ActiveRecord::Base
   
   belongs_to :dispositivo
   belongs_to :denunciante
+  has_attached_file :foto
   
   accepts_nested_attributes_for :denunciante
   accepts_nested_attributes_for :dispositivo

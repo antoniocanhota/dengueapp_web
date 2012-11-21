@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121028224812) do
+ActiveRecord::Schema.define(:version => 20121121005511) do
 
   create_table "denunciantes", :force => true do |t|
     t.string   "situacao",   :limit => 4
@@ -23,11 +24,15 @@ ActiveRecord::Schema.define(:version => 20121028224812) do
     t.datetime "data_e_hora"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "situacao",       :limit => 4
-    t.integer  "denunciante_id",              :null => false
+    t.string   "situacao",          :limit => 4
+    t.integer  "denunciante_id",                 :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "dispositivo_id",              :null => false
+    t.integer  "dispositivo_id",                 :null => false
+    t.string   "foto_file_name"
+    t.string   "foto_content_type"
+    t.integer  "foto_file_size"
+    t.datetime "foto_updated_at"
   end
 
   create_table "dispositivos", :force => true do |t|
