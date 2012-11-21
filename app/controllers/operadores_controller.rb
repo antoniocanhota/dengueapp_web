@@ -1,3 +1,6 @@
+#!/bin/env ruby
+# encoding: utf-8
+
 class OperadoresController < ApplicationController
   before_filter :authenticate_usuario!
   load_and_authorize_resource

@@ -1,3 +1,6 @@
+#!/bin/env ruby
+# encoding: utf-8
+
 class DenunciasController < ApplicationController
   
   before_filter :authenticate_usuario!

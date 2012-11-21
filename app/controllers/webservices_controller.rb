@@ -1,3 +1,6 @@
+#!/bin/env ruby
+# encoding: utf-8
+
 class WebservicesController < ApplicationController
   
   def denuncias
@@ -9,7 +12,7 @@ class WebservicesController < ApplicationController
     render :xml => Denuncia.do_denunciante(dispositivo.denunciante_id), :except => [:created_at, :updated_at, :situacao, :denunciante_id]    
   end
   
-  def publicar_denuncia    
+  def publicar_denuncia 
     @denuncia = Denuncia.new(params[:denuncia])
     #Início da montagem da denúncia
     dispositivo = Dispositivo.find_by_identificador_do_android(params[:dispositivo][:identificador_do_android])

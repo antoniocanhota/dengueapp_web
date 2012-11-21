@@ -1,3 +1,6 @@
+#!/bin/env ruby
+# encoding: utf-8
+
 class Usuario < ActiveRecord::Base
   
   SENHA_PADRAO = 'qwerty123'

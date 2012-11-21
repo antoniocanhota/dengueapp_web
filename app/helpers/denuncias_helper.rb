@@ -1,3 +1,6 @@
+#!/bin/env ruby
+# encoding: utf-8
+
 module DenunciasHelper
   
   def mapa_do_grande_rio(marcadores)

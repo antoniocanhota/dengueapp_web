@@ -1,3 +1,6 @@
+#!/bin/env ruby
+# encoding: utf-8
+
 class HomeController < ApplicationController
   before_filter :authenticate_usuario!
   authorize_resource :class => false

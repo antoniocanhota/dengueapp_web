@@ -1,3 +1,6 @@
+#!/bin/env ruby
+# encoding: utf-8
+
 module ApplicationHelper
   
   def exibir_dado(rotulo,dado)

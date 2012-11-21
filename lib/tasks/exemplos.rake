@@ -1,3 +1,6 @@
+#!/bin/env ruby
+# encoding: utf-8
+
 namespace :exemplos do
   
   desc 'Cria denúncias diversas no sistema'
