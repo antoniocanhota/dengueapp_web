@@ -1,15 +1,7 @@
-<div class="row-fluid">
-  <div class="span9" style="height:560px">
+<div style="height:560px">
     <%= mapa_do_grande_rio(@denuncias) %>
-  </div>
-  <div class="span3">
-    <%= link_to "Acompanhar Minhas Denúncias", new_usuario_session_path, :class => "btn btn-large btn-success" %>
-    <br /><br />
-    <h1>Denuncie</h1>
-    <p>O que temos que ter sempre em mente é que a determinação clara de objetivos afeta positivamente a correta previsão das condições inegavelmente apropriadas.</p>
-    <h1>Acompanhe</h1>
-    <p>Neste sentido, a mobilidade dos capitais internacionais causa impacto indireto na reavaliação do fluxo de informações.</p>
-    <h1>Compartilhe</h1>
-    <p>A prática cotidiana prova que o desafiador cenário globalizado promove a alavancagem das novas proposições.</p>
-  </div>
 </div>
+<% @denuncias_objeto.each do |d| %>
+<%= render :partial => "denuncias/modal", :locals => {:d => d} %>
+<% end %>
+

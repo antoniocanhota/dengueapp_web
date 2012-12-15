@@ -1,0 +1,14 @@
+<div id=<%= "myModal#{d.id}" %> class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby=<%= "myModalLabel#{d.id}" %> aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Detalhes da Denúncia #<%= d.id%></h3>
+  </div>
+  <div class="modal-body">
+    <img src="http://1.bp.blogspot.com/_17PLUG6gSR8/S702ayUyVMI/AAAAAAAAAGg/JFZejUFDRk0/s1600/Quadra+foco+de+dengue.JPG" alt="" height="480" width="640">
+    <br />
+    <p>Publicada <%= Date.today-d.data_e_hora.to_date %> dia(s) atrás.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+  </div>
+</div>

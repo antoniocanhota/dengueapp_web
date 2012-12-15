@@ -7,6 +7,7 @@ class PublicController < ApplicationController
     @denuncias = Denuncia.ativas.all.to_gmaps4rails do |denuncia,marker|
       marker.infowindow render_to_string(:partial => "/denuncias/info_window", :locals => {:denuncia => denuncia})
     end
+    @denuncias_objeto = Denuncia.ativas
   end
 
   def login
