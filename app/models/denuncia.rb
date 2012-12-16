@@ -12,7 +12,8 @@ class Denuncia < ActiveRecord::Base
   belongs_to :denunciante
   has_attached_file :foto,
     :storage => :dropbox,
-    :dropbox_credentials => "#{Rails.root}/config/dropbox.yml"
+    :dropbox_credentials => "#{Rails.root}/config/dropbox.yml",
+    :path => proc { "foto_denuncia_#{id}" }
   
   accepts_nested_attributes_for :denunciante
   accepts_nested_attributes_for :dispositivo
