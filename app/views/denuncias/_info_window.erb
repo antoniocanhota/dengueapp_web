@@ -1,4 +1,3 @@
 <div>
-<%= image_tag denuncia.foto.url, :size => "176x99"%><br />
-Publicada <%= Date.today-denuncia.data_e_hora.to_date %> dia(s) atrás.<br />
+Enviada em <%= I18n.l denuncia.data_e_hora %><br />
 <a href=<%="#myModal#{denuncia.id}"%> data-toggle="modal">Mais Detalhes</a>
