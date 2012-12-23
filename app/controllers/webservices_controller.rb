@@ -4,7 +4,11 @@
 class WebservicesController < ApplicationController
   
   def denuncias
-    render :xml => Denuncia.ativas, :except => [:created_at, :updated_at, :situacao, :denunciante_id]
+    #render :xml => Denuncia.ativas, :except => [:created_at, :updated_at, :situacao, :denunciante_id, :dispositivo_id]
+    @denuncias = Denuncia.ativas
+     respond_to do |format|
+      format.xml#  { render :xml => Denuncia.ativas }
+    end
   end  
   
   def denuncias_do_usuario
