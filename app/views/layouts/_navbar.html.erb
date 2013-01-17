@@ -14,7 +14,8 @@
       </ul>
       <!-- BOX DE LOGIN E SAIR-->
       <ul class="nav pull-right">
-          <li><%= link_to("Contato","https://docs.google.com/spreadsheet/viewform?fromEmail=true&formkey=dGloOVpIUThNN0tWWkhwZWNJQkl3ekE6MQ") %></li>
+           <li><%= link_to("Download", download_path) %></li>
+           <li><%= link_to("Contato","https://docs.google.com/spreadsheet/viewform?fromEmail=true&formkey=dGloOVpIUThNN0tWWkhwZWNJQkl3ekE6MQ") %></li>
       <% if usuario_atual %>
           <li><%= link_to('Sair', destroy_usuario_session_path, :method => :delete) %></li
       <% else %>

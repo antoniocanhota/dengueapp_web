@@ -13,5 +13,13 @@ class PublicController < ApplicationController
   def login
     
   end
+
+  def download
+
+  end
+
+  def download_android
+    send_file "public/android_app/dengueapp_android_10rc.apk", :type => " application/vnd.android.package-archive", :x_sendfile=>true
+  end
   
 end

@@ -8,6 +8,10 @@ Dengueapp::Application.routes.draw do
 
   match "home/denunciate" =>  "public#index", :as => "home_denunciante"
 
+  match "download" => "public#download", :as => "download"
+
+  match "download/android" => "public#download_android", :as => "download_android"
+
   match "acesso_negado" => "application#acesso_negado", :as => "acesso_negado"
   
   match "minhas_denuncias" => "denuncias#minhas_denuncias", :as => "minhas_denuncias"
