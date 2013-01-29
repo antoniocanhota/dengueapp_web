@@ -5,19 +5,16 @@ class Dispositivo < ActiveRecord::Base
   
   has_many :denuncias  
   belongs_to :denunciante
-  
-  before_create :gerar_codigo_de_verificacao,
-    :codificar_numero_de_telefone
-  
+
+  validates_presence_of :denunciante_id
+
+  before_create :codificar_numero_de_telefone_e_identificador_do_hardware
+
   private
   
-  #TODO: Esse código deverá ser gerado pela aplicação Android
-  def gerar_codigo_de_verificacao
-    self.codigo_de_verificacao = "123456"
-  end
-  
-  def codificar_numero_de_telefone
-    #TODO: Implementar a criptografia desse dado  
+  def codificar_numero_de_telefone_e_identificador_do_hardware
+    self[:identificador_do_hardware] = Digest::SHA1.hexdigest(self.identificador_do_hardware) if self.identificador_do_hardware
+    self[:numero_do_telefone] = Digest::SHA1.hexdigest(self.numero_do_telefone) if self.numero_do_telefone
   end
   
 end
