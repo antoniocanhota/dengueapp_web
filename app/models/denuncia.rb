@@ -20,7 +20,9 @@ class Denuncia < ActiveRecord::Base
   accepts_nested_attributes_for :dispositivo
   
   acts_as_gmappable :process_geocoding => false
-  
+
+  validates_presence_of :denunciante_id
+
   before_create :atribuir_valores_iniciais
   
   scope :ativas, where(:situacao => Denuncia::ATIVA)
@@ -97,5 +99,5 @@ class Denuncia < ActiveRecord::Base
       errors[:base] << "Somente denúncias com situação ATIVA podem ser resolvidas."
     end
   end
- 
+
 end
