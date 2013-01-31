@@ -19,7 +19,7 @@ class PublicController < ApplicationController
   end
 
   def download_android
-    send_file "public/android_app/dengueapp_android_#{VERSAO_ANDROID}.apk", :type => " application/vnd.android.package-archive", :x_sendfile=>true
+    send_file "public/android_app/dengueapp_android_#{PublicHelper::VERSAO_ANDROID}.apk", :type => " application/vnd.android.package-archive", :x_sendfile=>true
   end
   
 end

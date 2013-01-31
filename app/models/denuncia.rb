@@ -21,8 +21,6 @@ class Denuncia < ActiveRecord::Base
   
   acts_as_gmappable :process_geocoding => false
 
-  validates_presence_of :denunciante_id
-
   before_create :atribuir_valores_iniciais
   
   scope :ativas, where(:situacao => Denuncia::ATIVA)

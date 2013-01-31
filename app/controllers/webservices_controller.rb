@@ -16,7 +16,7 @@ class WebservicesController < ApplicationController
     render :xml => Denuncia.do_denunciante(dispositivo.denunciante_id), :except => [:created_at, :updated_at, :situacao, :denunciante_id]    
   end
   
-  def publicar_denuncia 
+  def publicar_denuncia
     @denuncia = Denuncia.new(params[:denuncia])
     #Início da montagem da denúncia
     dispositivo = Dispositivo.find_by_identificador_do_android(params[:dispositivo][:identificador_do_android])
@@ -24,12 +24,11 @@ class WebservicesController < ApplicationController
       @denuncia.dispositivo = dispositivo
       @denuncia.denunciante = dispositivo.denunciante
     else
-      @denuncia.dispositivo = Dispositivo.new(params[:dispositivo])
-      denunciante = Denunciante.new
-      @denuncia.denunciante = denunciante      
-      @denuncia.dispositivo.denunciante = denunciante
+      dispositivo = @denuncia.build_dispositivo(params[:dispositivo])
+      denunciante = dispositivo.build_denunciante
+      @denuncia.denunciante = denunciante
     end
-    #Fim da montagem da denúncia    
+    #Fim da montagem da denúncia
     respond_to do |format|
       if @denuncia.save        
         format.xml { render :xml => @denuncia.to_xml, :status => :created, :location => @denuncia }

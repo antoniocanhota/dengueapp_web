@@ -6,8 +6,6 @@ class Dispositivo < ActiveRecord::Base
   has_many :denuncias  
   belongs_to :denunciante
 
-  validates_presence_of :denunciante_id
-
   before_create :codificar_numero_de_telefone_e_identificador_do_hardware
 
   def self.find_all_by_numero_do_telefone_real(numero_do_telefone,codigo_de_verificacao)
