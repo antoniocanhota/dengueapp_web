@@ -2,7 +2,10 @@
 # encoding: utf-8
 
 module PublicHelper
-  
+  VERSAO_ANDROID = "11rc"
+  VERSAO_ANDROID_HUMANO = "1.1rc"
+  DATA_ULTIMA_VERSAO_ANDROID = "30/01/2013"
+
   def resoruce_name
     :usuario
   end
