@@ -11,21 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121121005511) do
-
-  create_table "denunciantes", :force => true do |t|
-    t.string   "situacao",   :limit => 4
-    t.integer  "usuario_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20130201171911) do
 
   create_table "denuncias", :force => true do |t|
     t.datetime "data_e_hora"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "situacao",          :limit => 4
-    t.integer  "denunciante_id",                 :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "dispositivo_id",                 :null => false
@@ -43,14 +35,7 @@ ActiveRecord::Schema.define(:version => 20121121005511) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "denunciante_id",            :null => false
-  end
-
-  create_table "operadores", :force => true do |t|
-    t.string   "tipo",       :limit => 4
-    t.string   "situacao",   :limit => 4
-    t.integer  "usuario_id",              :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "usuario_id"
   end
 
   create_table "usuarios", :force => true do |t|
@@ -67,6 +52,9 @@ ActiveRecord::Schema.define(:version => 20121121005511) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "denunciante_situacao",   :limit => 4
+    t.boolean  "moderador"
+    t.boolean  "administrador"
   end
 
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true

@@ -9,14 +9,12 @@ class Denuncia < ActiveRecord::Base
   RESOLVIDA = "DNSS"
   
   belongs_to :dispositivo
-  belongs_to :denunciante
   has_attached_file :foto,
     :storage => :dropbox,
     :dropbox_credentials => "#{Rails.root}/config/dropbox.yml",
     :dropbox_options => {
       :path => proc { "foto_denuncia_#{id}" }
     }
-  accepts_nested_attributes_for :denunciante
   accepts_nested_attributes_for :dispositivo
   
   acts_as_gmappable :process_geocoding => false
@@ -28,7 +26,16 @@ class Denuncia < ActiveRecord::Base
   scope :canceladas, where(:situacao => Denuncia::CANCELADA)
   scope :resolvidas, where(:situacao => Denuncia::RESOLVIDA)
   scope :do_denunciante, lambda{ |denunciante_id| where(:denunciante_id => denunciante_id) unless denunciante_id.blank? }
-  
+
+  def self.do_usuario
+    usuario = self.dispositivo.usuario
+    if usuario
+      return usuario.denuncias
+    else
+      return []
+    end
+  end
+
   def gmaps4rails
     "#{self.latitude},#{self.longitude}"
   end

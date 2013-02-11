@@ -13,7 +13,7 @@ class WebservicesController < ApplicationController
   
   def denuncias_do_usuario
     dispositivo = Dispositivo.find_by_identificador_do_android(params[:identificador_do_android])
-    render :xml => Denuncia.do_denunciante(dispositivo.denunciante_id), :except => [:created_at, :updated_at, :situacao, :denunciante_id]    
+    render :xml => Denuncia.do_usuario(dispositivo.usuario_id), :except => [:created_at, :updated_at, :situacao, :denunciante_id]
   end
   
   def publicar_denuncia
@@ -22,11 +22,8 @@ class WebservicesController < ApplicationController
     dispositivo = Dispositivo.find_by_identificador_do_android(params[:dispositivo][:identificador_do_android])
     if dispositivo
       @denuncia.dispositivo = dispositivo
-      @denuncia.denunciante = dispositivo.denunciante
     else
       dispositivo = @denuncia.build_dispositivo(params[:dispositivo])
-      denunciante = dispositivo.build_denunciante
-      @denuncia.denunciante = denunciante
     end
     #Fim da montagem da denúncia
     respond_to do |format|

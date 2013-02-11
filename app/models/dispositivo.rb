@@ -4,7 +4,7 @@
 class Dispositivo < ActiveRecord::Base
   
   has_many :denuncias  
-  belongs_to :denunciante
+  belongs_to :usuario
 
   before_create :codificar_numero_de_telefone_e_identificador_do_hardware
 

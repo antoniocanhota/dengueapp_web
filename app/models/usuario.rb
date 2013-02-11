@@ -5,6 +5,10 @@ class Usuario < ActiveRecord::Base
   
   SENHA_PADRAO = 'qwerty123'
 
+  DENUNCIANTE_CADASTRADO = "UDSC"
+  DENUNCIANTE_BANIDO = "UDSB"
+  DENUNCIANTE_DESISTENTE = "UDSD"
+
   @dispositivo_primario = nil
   
   # Include default devise modules. Others available are:
@@ -16,50 +20,76 @@ class Usuario < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :nome, :codigo_de_verificacao, :identificador_do_hardware, :numero_do_telefone
   attr_accessor :codigo_de_verificacao, :identificador_do_hardware, :numero_do_telefone
   
-  has_one :denunciante
-  has_one :operador
+  has_many :dispositivos
   
   validates_presence_of :nome
+  validate :definicao_de_perfil
   validate :verificar_existencia_do_dispositivo, :on => :create
   validates_length_of :codigo_de_verificacao, :is => 6
   
-  after_create :enviar_email_de_confirmacao_de_cadastro, :associar_dispositivo_primario_e_denunciante
-  
-  #TODO: refatorar para realocar parte desses métodos para a classe Operador
-  def administrador?
-    if self.operador
-      return true if (self.operador.tipo == Operador::ADMINISTRADOR and self.operador.situacao == Operador::ATIVO)
-    end
-    return false
-  end
-  
-  #TODO: refatorar para realocar parte desses métodos para a classe Operador
-  def moderador?
-    if self.operador
-      return true if (self.operador.tipo == Operador::MODERADOR and self.operador.situacao == Operador::ATIVO)
-    end
-    return false
-  end
+  after_create :enviar_email_de_confirmacao_de_cadastro, :associar_dispositivo_primario
   
   def denunciante?
-    if self.denunciante
-      return true if (self.denunciante.situacao == Denunciante::CADASTRADO)
+    if (self.denunciante_situacao == DENUNCIANTE_CADASTRADO)
+      return true
+    else
+      return false
     end
-    return false
+  end
+
+  def banivel?
+    if (self.denunciante?) and (self.denuncias.rejeitadas.count >= 3) and (self.denunciante_situacao == DENUNCIANTE_CADASTRADO)
+      return true
+    else
+      return false
+    end
+  end
+
+  def banir
+    if self.banivel?
+      ActiveRecord::Base.transaction do
+        self.update_attribute(:denunciante_situacao,DENUNCIANTE_BANIDO)
+        self.denuncias.ativas.each do |d|
+          d.rejeitar
+        end
+      end
+    else
+      errors[:base] << "Somente usuários com situação CADASTRADO e pelo menos 3 denúncias rejeitadas podem ser banidos."
+    end
+  end
+
+  def desistir
+    if self.denunciante_situacao == DENUNCIANTE_CADASTRADO
+      ActiveRecord::Base.transaction do
+        self.update_attribute(:denunciante_situacao,DENUNCIANTE_CESISTENTE)
+        self.denuncias.ativas.each do |d|
+          d.cancelar
+        end
+      end
+    else
+      errors[:base] << "Somente usuários com situação CADASTRADO podem ser alterados para DESISTENTE."
+    end
   end
   
   def enviar_email_de_confirmacao_de_cadastro
     DengueAppMailer.conta_criada(self).deliver
   end
 
-  def associar_dispositivo_e_denunciante(dispositivo)
-    dispositivo.denunciante.update_attribute(:usuario_id,self.id)
+  def associar_dispositivo(dispositivo)
+    dispositivo.update_attribute(:usuario_id,self.id)
+  end
+
+  def denuncias
+    Denuncia.joins(:dispositivos).where(:dispositivos => {:usuario_id => self.id})
   end
 
   private
+  def definicao_de_perfil
+    # code here
+  end
 
-  def associar_dispositivo_primario_e_denunciante
-    self.associar_dispositivo_e_denunciante(@dispositivo_primario)
+  def associar_dispositivo_primario
+    self.associar_dispositivo(@dispositivo_primario)
   end
 
   def verificar_existencia_do_dispositivo
