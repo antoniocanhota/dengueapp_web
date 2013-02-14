@@ -1,7 +1,38 @@
-<div style="height:560px">
-    <%= mapa_do_grande_rio(@denuncias) %>
+<div id="div_do_mapa_grande" style="height: 500px; margin-left: -20px; margin-right: -20px; margin-top: -29px;">
+  <script type="text/javascript">
+      var divHeight = document.documentElement.clientHeight;
+      document.getElementById('div_do_mapa_grande').style.height = (divHeight-100+29)+"px";
+  </script>
+  <%= mapa_do_grande_rio(@denuncias) %>
 </div>
+
 <% @denuncias_objeto.each do |d| %>
 <%= render :partial => "denuncias/modal", :locals => {:d => d} %>
 <% end %>
+<% if cookies[:hide_modal] != "true" %>
+<script type="text/javascript">
+    $(window).load(function(){
+        $('#myModal').modal('show');
+    });
+    $('#myModal').on('hidden', function () {
+        <% cookies[:hide_modal] = "true" %>
+    })
+</script>
+<% end %>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h2 id="myModalLabel">Bem-vindo ao DengueApp</h2>
+  </div>
+  <div class="modal-body">
+    <p>Caso você não conheça o DengueApp, clique a seguir em "Conheça a aplicação". Se já conhece, basta ir em "Prosseguir para o site".</p>
+      <p>Além disso, a qualquer momento você poderá ter mais informações sobre a aplicação clicando em "Conheça a aplicação" na barra superior.</p>
+  </div>
+  <div class="modal-footer">
+    <%= link_to "Conheça a aplicação", conheca_a_aplicacao_path, {:class => "btn btn-large"} %>
+    <button class="btn btn-large btn-primary" data-dismiss="modal" aria-hidden="true">Prosseguir para o site</button>
+  </div>
+</div>
 

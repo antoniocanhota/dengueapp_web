@@ -12,6 +12,8 @@ Dengueapp::Application.routes.draw do
 
   match "download/android" => "public#download_android", :as => "download_android"
 
+  match "conheca_a_aplicacao" => "public#conheca_a_aplicacao", :as => "conheca_a_aplicacao"
+
   match "acesso_negado" => "application#acesso_negado", :as => "acesso_negado"
   
   match "minhas_denuncias" => "denuncias#minhas_denuncias", :as => "minhas_denuncias"

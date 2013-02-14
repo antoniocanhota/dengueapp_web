@@ -8,7 +8,7 @@
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  <body style="padding-top: 80px">
+  <body>
       
       <%= render "layouts/navbar" %>
       <div class="container-fluid">
@@ -24,10 +24,7 @@
       <!-- CONTEUDO DA PAGINA -->
       
       <%= yield %>
-      <hr/>
-<footer>
-<p>Desenvolvido por Antonio Canhota</p>
-</footer>
+
       </div>
       
   <%= yield :scripts %>

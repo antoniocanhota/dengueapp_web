@@ -8,7 +8,7 @@ module DenunciasHelper
         :center_latitude => "-22.890209",
         :center_longitude => "-43.296562", 
         :type => "HYBRID", 
-        :zoom => 11, 
+        :zoom => 11,
         :auto_adjust => false
       },
       :markers => {"data" => marcadores}
