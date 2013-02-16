@@ -1,3 +1,10 @@
+.fill_screen {
+    height: 500px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-top: -29px;
+}
+
 .map_container {
   width: auto;
   height: 100%;

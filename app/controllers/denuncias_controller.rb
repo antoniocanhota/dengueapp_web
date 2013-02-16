@@ -38,17 +38,12 @@ class DenunciasController < ApplicationController
     redirect_to ativas_denuncias_path
   end
 
-  # GET /minhas_denuncias
-  # GET /minhas_denuncias.json
   def minhas_denuncias
-    #TODO: Refatorar @minhas_denuncias por motivos obvios!
-    @minhas_denuncias = Denuncia.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @denuncias }
+    minhas_denuncias = usuario_atual.denuncias
+    @minhas_denuncias = minhas_denuncias.all.to_gmaps4rails do |denuncia,marker|
+      marker.infowindow render_to_string(:partial => "/denuncias/info_window", :locals => {:denuncia => denuncia})
     end
-    
+    @minhas_denuncias_objeto = minhas_denuncias
   end
   
   def show

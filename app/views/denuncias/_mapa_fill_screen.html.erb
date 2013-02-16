@@ -1,0 +1,11 @@
+<div id="mapa_fill_screen" class="fill_screen">
+  <script type="text/javascript">
+      var divHeight = document.documentElement.clientHeight;
+      document.getElementById('mapa_fill_screen').style.height = (divHeight-100+29)+"px";
+  </script>
+  <%= mapa_do_grande_rio(denuncias) %>
+</div>
+
+<% denuncias_objeto.each do |d| %>
+    <%= render :partial => "denuncias/modal", :locals => {:d => d} %>
+<% end %>

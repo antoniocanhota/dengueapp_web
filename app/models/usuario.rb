@@ -80,7 +80,7 @@ class Usuario < ActiveRecord::Base
   end
 
   def denuncias
-    Denuncia.joins(:dispositivos).where(:dispositivos => {:usuario_id => self.id})
+    Denuncia.joins(:dispositivo).where(:dispositivos => {:usuario_id => self.id})
   end
 
   private
