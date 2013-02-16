@@ -19,6 +19,7 @@ class Denuncia < ActiveRecord::Base
   
   acts_as_gmappable :process_geocoding => false
 
+  before_save :identificar_bairro_e_cidade
   before_create :atribuir_valores_iniciais
   
   scope :ativas, where(:situacao => Denuncia::ATIVA)
@@ -103,6 +104,23 @@ class Denuncia < ActiveRecord::Base
     else
       errors[:base] << "Somente denúncias com situação ATIVA podem ser resolvidas."
     end
+  end
+
+  private
+
+  def identificar_bairro_e_cidade
+    #TODO: Remover esses 'puts'
+    puts "entrei no método"
+    if (self.new_record? or self.changes.include? "latitude" or self.changes.include? "longitude")
+      puts "indo no google"
+      endereco_geocodificado = Gmaps4rails.geocode("#{self.latitude},#{self.longitude}").first
+      puts "já fui no google"
+      endereco_geocodificado[:full_data]["address_components"].each do |c|
+        self.bairro = c["long_name"] if c["types"].include? "sublocality"
+        self.cidade = c["long_name"] if c["types"].include? "locality"
+      end
+    end
+    puts "saindo do método"
   end
 
 end
