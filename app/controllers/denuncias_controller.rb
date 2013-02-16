@@ -39,6 +39,7 @@ class DenunciasController < ApplicationController
   end
 
   def minhas_denuncias
+    @barra_de_gerenciar_denuncia = true
     minhas_denuncias = usuario_atual.denuncias
     @minhas_denuncias = minhas_denuncias.all.to_gmaps4rails do |denuncia,marker|
       marker.infowindow render_to_string(:partial => "/denuncias/info_window", :locals => {:denuncia => denuncia})

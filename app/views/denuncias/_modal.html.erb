@@ -1,13 +1,9 @@
 <div id=<%= "myModal#{d.id}" %> class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby=<%= "myModalLabel#{d.id}" %> aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Detalhes da Denúncia #<%= d.id%></h3>
+    <h3 id="myModalLabel">Foto da Denúncia #<%= d.id%></h3>
   </div>
   <div class="modal-body">
-    <%= image_tag d.foto.url %><br />
-    <p>Enviada em <%= I18n.l d.data_e_hora %></p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
+    <%= image_tag d.foto.url, {:width => "540px"} %>
   </div>
 </div>

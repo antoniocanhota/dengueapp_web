@@ -1,3 +1,14 @@
-<div>
-Enviada em <%= I18n.l denuncia.data_e_hora %><br />
-<a href=<%="#myModal#{denuncia.id}"%> data-toggle="modal">Mais Detalhes</a>
+<div class="thumbnail" style="background: none;">
+  <div style="cursor: url(/icone_lupa.gif),auto">
+    <a style="cursor: url(/icone_lupa.gif),auto" href=<%="#myModal#{denuncia.id}"%> data-toggle="modal" ><%= image_tag denuncia.foto.url, {:style => "width: 240px"} %></a>
+  </div>
+  <div class="caption">
+    <h4>Denúncia #<%= denuncia.id %></h4>
+    <p style="color: black;">Enviada em <%= I18n.l denuncia.data_e_hora %></p>
+    <% if @barra_de_gerenciar_denuncia == true %>
+    <p>
+             kds;fk;dls
+    </p>
+    <% end %>
+  </div>
+</div>
