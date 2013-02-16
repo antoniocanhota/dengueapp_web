@@ -42,6 +42,7 @@ Dengueapp::Application.routes.draw do
     get 'rejeitadas', :on => :collection
     get 'canceladas', :on => :collection
     get 'resolvidas', :on => :collection
+    get 'estatisticas', :on => :collection
   end
   
   # You can have the root of your site routed with "root"

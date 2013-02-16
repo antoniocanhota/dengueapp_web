@@ -5,6 +5,7 @@ class Ability
     usuario ||= Usuario.new # guest user (not logged in)
     cannot :manage, :all
     can :index, :home
+    can :estatisticas, Denuncia
     if usuario.administrador?
       can :administrador, :home
       can :index, Denuncia

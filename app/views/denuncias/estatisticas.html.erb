@@ -1,0 +1,44 @@
+<div class="row-fluid">
+  <div class="span4">
+    <h3>Denúncias por bairro</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Bairro</th>
+          <th>Quantidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @denuncias_por_bairro.each do |b| %>
+        <tr>
+          <td><%= b[0] %></td>
+          <td><%= b[1] %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="span4">
+    <h3>Denúncias por cidade</h3>
+    <table>
+      <thead>
+      <tr>
+        <th>Cidade</th>
+        <th>Quantidade</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @denuncias_por_cidade.each do |c| %>
+          <tr>
+            <td><%= c[0] %></td>
+            <td><%= c[1] %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="span4">
+    <h3>Quantidade de denúncias recebidas por dia</h3>
+  </div>
+</div>
+
