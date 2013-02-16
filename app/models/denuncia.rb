@@ -28,13 +28,8 @@ class Denuncia < ActiveRecord::Base
   scope :resolvidas, where(:situacao => Denuncia::RESOLVIDA)
   scope :do_denunciante, lambda{ |denunciante_id| where(:denunciante_id => denunciante_id) unless denunciante_id.blank? }
 
-  def self.do_usuario
-    usuario = self.dispositivo.usuario
-    if usuario
-      return usuario.denuncias
-    else
-      return []
-    end
+  def self.do_usuario(usuario_id)
+    Denuncia.joins(:dispositivo).where(:dispositivos => {:usuario_id => usuario_id})
   end
 
   def gmaps4rails

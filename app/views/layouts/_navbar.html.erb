@@ -10,7 +10,7 @@
           <li><%= (link_to "Gerenciar Denúncias", denuncias_path) if can? :index, Denuncia %></li>
           <li><%= (link_to "Gerenciar Operadores", operadores_path) if can? :index, Operador%></li>
           <li><%= (link_to "Todas as Denúncias", home_denunciante_path) if can? :minhas_denuncias, Denuncia%></li>
-          <li><%= (link_to "Minhas Denúncias", minhas_denuncias_path) if can? :minhas_denuncias, Denuncia %></li>
+          <li><%= (link_to "Minhas Denúncias", denuncias_path(:usuario_id => usuario_atual.id)) if can? :minhas_denuncias, Denuncia %></li>
         <% end %>
       </ul>
       <!-- BOX DE LOGIN E SAIR-->

@@ -3,12 +3,26 @@
     <a style="cursor: url(/icone_lupa.gif),auto" href=<%="#myModal#{denuncia.id}"%> data-toggle="modal" ><%= image_tag denuncia.foto.url, {:style => "width: 240px"} %></a>
   </div>
   <div class="caption">
-    <h4>Denúncia #<%= denuncia.id %></h4>
+    <h4>
+      Denúncia #<%= denuncia.id %>
+      <%= badge_de_situacao(denuncia.situacao) %>
+    </h4>
     <p style="color: black;">Enviada em <%= I18n.l denuncia.data_e_hora %></p>
-    <% if @barra_de_gerenciar_denuncia == true %>
-    <p>
-             kds;fk;dls
-    </p>
+    <% if current_ability.can? :manage, denuncia %>
+        <p>
+          <% if current_user.administrador? or current_user.moderador? %>
+            <%= link_to "Ver denúncias deste usuário/dispositivo", denuncias_path(:dispositivo_id => d.dispositivo_id), :class => "btn btn-mini btn-inverse" %>
+          <% end %>
+          <% if current_ability.can? :rejeitar, denuncia %>
+            <%= link_to "Rejeitar", denuncia_update_situacao_path(denuncia, :situacao => Denuncia::REJEITADA), :class => "btn btn-mini btn-danger" %>
+          <% end %>
+          <% if current_ability.can? :cancelar, denuncia %>
+              <%= link_to "Cancelar", denuncia_update_situacao_path(denuncia, :situacao => Denuncia::CANCELADA), :class => "btn btn-mini btn-warning" %>
+          <% end %>
+          <% if current_ability.can? :resolver, denuncia %>
+            <%= link_to "Resolver", denuncia_update_situacao_path(denuncia, :situacao => Denuncia::RESOLVIDA), :class => "btn btn-mini btn-success" %>
+          <% end %>
+        </p>
     <% end %>
   </div>
 </div>

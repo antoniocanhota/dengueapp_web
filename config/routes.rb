@@ -16,8 +16,6 @@ Dengueapp::Application.routes.draw do
 
   match "acesso_negado" => "application#acesso_negado", :as => "acesso_negado"
   
-  match "minhas_denuncias" => "denuncias#minhas_denuncias", :as => "minhas_denuncias"
-  
   match "webservices/denuncias" => "webservices#denuncias", :as => "webservice_denuncias"
   
   match "webservices/denuncias_do_usuario/:identificador_do_android" => "webservices#denuncias_do_usuario", :as => "webservice_denuncias_do_usuario"
@@ -38,11 +36,8 @@ Dengueapp::Application.routes.draw do
   match 'denuncias/:id/rejeitar' => 'denuncias#rejeitar', :as => "rejeitar_denuncia"
   match 'denuncias/:id/reativar' => 'denuncias#reativar', :as => "reativar_denuncia"
   resources :denuncias do
-    get 'ativas', :on => :collection
-    get 'rejeitadas', :on => :collection
-    get 'canceladas', :on => :collection
-    get 'resolvidas', :on => :collection
     get 'estatisticas', :on => :collection
+    get 'update_situacao'
   end
   
   # You can have the root of your site routed with "root"
