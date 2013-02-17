@@ -5,28 +5,23 @@ class Ability
     usuario ||= Usuario.new # guest user (not logged in)
     cannot :manage, :all
     can :read, Denuncia, :situacao => Denuncia::ATIVA
+
     can :index, :home
     can :estatisticas, Denuncia
     if (usuario.moderador? or usuario.administrador?)
-      can :manage, Denuncia
-      cannot :abandonar, Denuncia
+      can [:read,:update_situacao], Denuncia
+      cannot [:abandonar,:cancelar,:resolver], Denuncia
       can :ativar, Denuncia, :situacao => Denuncia::REJEITADA
       can :rejeitar, Denuncia, :situacao => Denuncia::ATIVA
-      cannot :cancelar, Denuncia
-      cannot :resolver, Denuncia
       if usuario.administrador?
         can :manage, :operador
       end
     elsif usuario.denunciante?
-      can [:manage,:update_situacao], Denuncia, ("dispositivo_id in (select id from dispositivos where usuario_id = #{usuario.id})") do |d|
+      can [:update_situacao], Denuncia, ("dispositivo_id in (select id from dispositivos where usuario_id = #{usuario.id})") do |d|
         d.dispositivo.usuario_id == usuario.id
       end
       can :read, Denuncia, :situacao => Denuncia::ATIVA
-      cannot :abandonar, Denuncia
-      cannot :reativar, Denuncia
-      cannot :rejeitar, Denuncia
-      cannot :cancelar, Denuncia
-      cannot :resolver, Denuncia
+      cannot [:abandonar,:reativar,:cancelar,:resolver] Denuncia
       can :resolver, Denuncia, ("situacao = #{Denuncia::ATIVA} and dispositivo_id in (select id from dispositivos where usuario_id = #{usuario.id})") do |d|
         d.dispositivo.usuario_id == usuario.id and d.situacao == Denuncia::ATIVA
       end

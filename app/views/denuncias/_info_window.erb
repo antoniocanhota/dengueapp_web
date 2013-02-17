@@ -8,10 +8,12 @@
       <%= badge_de_situacao(denuncia.situacao) %>
     </h4>
     <p style="color: black;">Enviada em <%= I18n.l denuncia.data_e_hora %></p>
-    <% if current_ability.can? :manage, denuncia %>
         <p>
           <% if current_user.administrador? or current_user.moderador? %>
-            <%= link_to "Ver denúncias deste usuário/dispositivo", denuncias_path(:dispositivo_id => denuncia.dispositivo_id), :class => "btn btn-mini btn-inverse" %>
+            <%= link_to "Ver denúncias deste denunciante", denuncias_path(:dispositivo_id => denuncia.dispositivo_id, :usuario_id => denuncia.dispositivo.usuario_id), :class => "btn btn-mini btn-inverse" %>
+          <% end %>
+          <% if current_ability.can? :ativar, denuncia %>
+            <%= link_to "Reativar", denuncia_update_situacao_path(denuncia, :situacao => Denuncia::ATIVA), :class => "btn btn-mini btn-success" %>
           <% end %>
           <% if current_ability.can? :rejeitar, denuncia %>
             <%= link_to "Rejeitar", denuncia_update_situacao_path(denuncia, :situacao => Denuncia::REJEITADA), :class => "btn btn-mini btn-danger" %>
@@ -23,6 +25,5 @@
             <%= link_to "Resolver", denuncia_update_situacao_path(denuncia, :situacao => Denuncia::RESOLVIDA), :class => "btn btn-mini btn-success" %>
           <% end %>
         </p>
-    <% end %>
   </div>
 </div>
