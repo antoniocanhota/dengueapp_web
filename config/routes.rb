@@ -1,27 +1,14 @@
 Dengueapp::Application.routes.draw do
 
-  get "home/administrador"
-
-  get "home/moderador"
-  
-  #get "home/denunciante"
-
-  match "home/denunciate" =>  "public#index", :as => "home_denunciante"
-
   match "download" => "public#download", :as => "download"
-
   match "download/android" => "public#download_android", :as => "download_android"
-
   match "conheca_a_aplicacao" => "public#conheca_a_aplicacao", :as => "conheca_a_aplicacao"
 
   match "acesso_negado" => "application#acesso_negado", :as => "acesso_negado"
   
   match "webservices/denuncias" => "webservices#denuncias", :as => "webservice_denuncias"
-  
   match "webservices/denuncias_do_usuario/:identificador_do_android" => "webservices#denuncias_do_usuario", :as => "webservice_denuncias_do_usuario"
-    
   match "webservices/denuncias/publicar" => "webservices#publicar_denuncia", :as => "webservice_publicar_denuncia", :via => :post
-  
   match "webservices/registro_do_dispositivo/:identificador_do_android" => "webservices#registro_do_dispositivo", :as => "webservice_registro_do_dispositivo"
 
   devise_for :usuarios
@@ -47,7 +34,7 @@ Dengueapp::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   authenticated :usuario do
-    root :to => 'home#index'
+    root :to => 'public#index'
   end
   root :to => 'public#index'
 
