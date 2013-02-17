@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130217012640) do
+ActiveRecord::Schema.define(:version => 20130217025422) do
 
   create_table "denuncias", :force => true do |t|
     t.datetime "data_e_hora"
@@ -33,10 +33,8 @@ ActiveRecord::Schema.define(:version => 20130217012640) do
     t.string   "numero_do_telefone"
     t.string   "identificador_do_hardware"
     t.string   "identificador_do_android"
-    t.string   "codigo_de_verificacao"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "denunciante_id",            :null => false
     t.integer  "usuario_id"
     t.string   "apelido"
   end
