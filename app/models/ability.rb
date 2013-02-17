@@ -14,7 +14,8 @@ class Ability
       if usuario.administrador?
         can :manage, :operador
       end
-    elsif usuario.denunciante?
+    end
+    if usuario.denunciante?
       can [:index,:update_situacao], Denuncia, ("dispositivo_id in (select id from dispositivos where usuario_id = #{usuario.id})") do |d|
         d.dispositivo.usuario_id == usuario.id
       end
