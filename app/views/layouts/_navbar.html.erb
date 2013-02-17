@@ -20,7 +20,7 @@
           </ul>
         </li>
         <!-- DROPDOWN DENUNCIAS -> DROPDOWN FUNCOES ADMINISTRATIVAS -->
-        <% if usuario_atual.administrador? or usuario_atual.moderador? %>
+        <% if usuario_atual and (usuario_atual.administrador? or usuario_atual.moderador?) %>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Funções Administrativas<b class="caret"></b></a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
