@@ -1,30 +1,34 @@
-<%= render "layouts/error_messages", :target => @operador %> 
-<%= form_for @operador, :html => { :class => 'form-horizontal' } do |f| %>
-<%= f.fields_for :usuario do |u| %>
+<%= render "layouts/error_messages", :target => @operador %>
+
   <div class="control-group">
-    <%= u.label :nome, :class => 'control-label' %>
+    <%= f.label :nome, :class => 'control-label' %>
     <div class="controls">
-      <%= u.text_field :nome, :class => 'text_field span6' %>
+      <%= f.text_field :nome, :class => 'text_field span6' %>
     </div>
   </div>
   <div class="control-group">
-    <%= u.label :email, :class => 'control-label' %>
+    <%= f.label :email, :class => 'control-label' %>
     <div class="controls">
-      <%= u.text_field :email, :class => 'text_field span4' %>
+      <%= f.text_field :email, :class => 'text_field span4' %>
     </div>
   </div>
-<% end %>
 <div class="control-group">
-  <%= f.label :tipo, :class => 'control-label' %>
+  <%= f.label :tipo_operador, "Tipo de Operador", :class => 'control-label' %>
   <div class="controls">
     <label class="radio">
-      <%= f.radio_button :tipo, Operador::MODERADOR, :checked => true %>
-      <%= f.label :tipo_m, 'Moderador' %>
+      <%= f.radio_button :tipo_operador, Usuario::MODERADOR, :checked => true %>
+      <%= f.label :tipo_operador_5, 'Moderador' %>
+      <%= f.radio_button :tipo_operador, Usuario::ADMINISTRADOR %>
+      <%= f.label :tipo_operador_8, 'Administrador' %>
+      <% unless f.object.new_record? %>
+          <%= f.radio_button :tipo_operador, Usuario::OPERADOR_INATIVO %>
+          <%= f.label :tipo_operador_0, 'Desativado' %>
+      <% end %>
     </label>
   </div>
 </div>
 <div class="form-actions">
-  <%= f.submit "Salvar", :class => 'btn btn-success' %>
   <%= link_to "Cancelar e Voltar", 'javascript:history.back()', :class => 'btn' %>
+  <%= f.submit "Salvar", :class => 'btn btn-success' %>
 </div>
-<% end %>
+

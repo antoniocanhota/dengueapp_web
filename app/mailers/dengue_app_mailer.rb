@@ -14,11 +14,10 @@ class DengueAppMailer < ActionMailer::Base
     mail(:to => usuario.email, :subject => "Sua conta no DengueApp foi criada")
   end
 
-  def notificar_alteracao_em_operador(operador,acao_no_participio)
-    @operador = operador
-    @usuario = operador.usuario
+  def notificar_alteracao_em_operador(usuario,acao_no_participio)
+    @usuario = usuario
     @acao_no_participio = acao_no_participio.downcase
-    mail(:to => operador.usuario.email, :subject => "Seu perfil de operador no DengueApp foi #{@acao_no_participio}")
+    mail(:to => @usuario.email, :subject => "Seu perfil de operador no DengueApp foi #{@acao_no_participio}")
   end
   
 end

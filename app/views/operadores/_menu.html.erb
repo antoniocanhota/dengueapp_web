@@ -3,11 +3,8 @@
     <li class="nav-header">
       Operadores
     </li>
-    <li class="<%= is_active?(moderadores_operadores_path) %>">
-      <%= link_to "Moderadores", moderadores_operadores_path %>
-    </li>
-    <li class="<%= is_active?(administradores_operadores_path) %>">
-      <%= link_to "Administradores", administradores_operadores_path %>
+    <li class="<%= is_active?(operadores_path) %>">
+      <%= link_to "Listagem", operadores_path %>
     </li>
     <li class="divider"></li>
     <li class="<%= is_active?(new_operador_path) %>">

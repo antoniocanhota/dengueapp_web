@@ -10,19 +10,21 @@
           <th>ID</th>
           <th>Nome</th>
           <th>E-mail</th>
-          <th>Situação</th>
+          <th>Tipo/Situação do Operador</th>
+          <th>Data de Cadastro</th>
           <th>Ações</th>
         </tr>
       </thead>
       <tbody>
         <% @operadores.each do |operador| %>
           <tr>
-            <td><%= link_to "##{operador.usuario.id}", operador_path(operador) %></td>
-            <td><%= operador.usuario.nome %></td>
-            <td><%= operador.usuario.email %></td>
-            <td><%= decodificar(operador.situacao) %></td>
+            <td><%= "##{operador.id}" %></td>
+            <td><%= operador.nome %></td>
+            <td><%= operador.email %></td>
+            <td><%= badge_de_tipo_ou_situacao(operador.tipo_operador) %></td>
+            <td><%= I18n.l operador.created_at %></td>
             <td>
-              <%= link_to "Detalhar", operador_path(operador), :class => 'btn btn-info btn-mini'  %>
+              <%= link_to "Editar", edit_operador_path(operador), :class => 'btn btn-primary btn-mini'  %>
             </td>
           </tr>
         <% end %>

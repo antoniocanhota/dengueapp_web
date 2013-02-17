@@ -3,7 +3,17 @@ Olá, <%= exibir_primeiro_nome(@usuario.nome) %>!
 Seu pefil de operador do DengueApp foi <%= @acao_no_participio %> com sucesso.
 
 Seu nome completo: <%= @usuario.nome %>
-Seu perfil de operador atual: <%= decodificar(@operador.tipo) %>
-Sua situação atual: <%= decodificar(@operador.situacao) %>
+<%
+   if @usuario.tipo_operador == Usuario::ADMINISTRADOR
+     tipo_humanizado = "Administrador"
+   elsif @usuario.tipo_operador == Usuario::MODERADOR
+     tipo_humanizado = "Moderador"
+   elsif @usuario.tipo_operador == Usuario::OPERADOR_INATIVO
+     tipo_humanizado = "Operador Inativo"
+   else
+     tipo_humanizado = "Desconhecido"
+   end
+%>
+Seu perfil de operador atual: <%= tipo_humanizado %>
 
 DengueApp

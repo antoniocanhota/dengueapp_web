@@ -1,4 +1,12 @@
-<%- model_class = @operador.class -%>
-<h1><%=t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human,
-                                 :default => "Edit #{model_class.model_name.human}") %></h1>
-<%= render :partial => 'form' %>
+<div class="row-fluid">
+  <%= render "menu" %>
+  <div class="span10">
+    <%- model_class = @operador.class -%>
+    <div class="page-header">
+      <h1>Editar Dados do Operador #<%= @operador.id %></h1>
+    </div>
+        <%= form_for @operador ,:url => operador_path(@operador), :method => :put ,:html => { :class => 'form-horizontal' } do |f| %>
+            <%= render 'form', :f => f %>
+        <% end %>
+  </div>
+</div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130217025422) do
+ActiveRecord::Schema.define(:version => 20130217195149) do
 
   create_table "denuncias", :force => true do |t|
     t.datetime "data_e_hora"
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(:version => 20130217025422) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "denunciante_situacao",   :limit => 4
-    t.boolean  "moderador"
-    t.boolean  "administrador"
+    t.integer  "tipo_operador"
+    t.integer  "operador_situacao",                     :default => 1
   end
 
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true

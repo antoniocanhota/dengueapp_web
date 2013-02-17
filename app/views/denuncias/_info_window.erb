@@ -11,7 +11,7 @@
     <% if current_ability.can? :manage, denuncia %>
         <p>
           <% if current_user.administrador? or current_user.moderador? %>
-            <%= link_to "Ver denúncias deste usuário/dispositivo", denuncias_path(:dispositivo_id => d.dispositivo_id), :class => "btn btn-mini btn-inverse" %>
+            <%= link_to "Ver denúncias deste usuário/dispositivo", denuncias_path(:dispositivo_id => denuncia.dispositivo_id), :class => "btn btn-mini btn-inverse" %>
           <% end %>
           <% if current_ability.can? :rejeitar, denuncia %>
             <%= link_to "Rejeitar", denuncia_update_situacao_path(denuncia, :situacao => Denuncia::REJEITADA), :class => "btn btn-mini btn-danger" %>

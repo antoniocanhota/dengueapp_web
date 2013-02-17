@@ -9,12 +9,9 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Denúncias<b class="caret"></b></a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li><%= (link_to "Denúncias dos Usuários", home_denunciante_path) if can? :minhas_denuncias, Denuncia%></li>
+            <li><%= link_to "Denúncias dos Usuários", root_path %></li>
             <% if usuario_atual and usuario_atual.denunciante? %>
                 <li><%= (link_to "Minhas Denúncias", denuncias_path(:usuario_id => usuario_atual.id)) if can? :minhas_denuncias, Denuncia %></li>
-            <% end %>
-            <% if usuario_atual and (usuario_atual.administrador? or usuario_atual.moderador?) %>
-                <li><%= (link_to "Gerenciar Denúncias", denuncias_path) if can? :index, Denuncia %></li>
             <% end %>
             <li><%= link_to "Estatísticas", estatisticas_denuncias_path %></li>
           </ul>
@@ -24,8 +21,8 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Funções Administrativas<b class="caret"></b></a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li><%= (link_to "Gerenciar Denuncias", denuncias_path) if can? :index, Denuncia %></li>
-            <li><%= (link_to "Gerenciar Operadores", operadores_path) if can? :index, Operador%></li>
+            <li><%= (link_to "Gerenciar Denuncias", denuncias_path) if can? :manage, Denuncia %></li>
+            <li><%= (link_to "Gerenciar Operadores", operadores_path) if can? :manage, :operador%></li>
           </ul>
         </li>
         <% end %>

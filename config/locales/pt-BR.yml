@@ -226,3 +226,4 @@ pt-BR:
         usuario:
           numero_de_telefone_e_identificador_de_hardware_em_branco: "Deve ser informado um número de telefone ou IMEI"
           dispositivo_nao_encontrado: "Não foi encontrado um dispositivo com os dados informados"
+          tipo_de_usuario_nao_definido: "O usuário deve ser um denunciante ou operador (moderador ou administrador)"

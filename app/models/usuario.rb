@@ -9,6 +9,10 @@ class Usuario < ActiveRecord::Base
   DENUNCIANTE_BANIDO = "UDSB"
   DENUNCIANTE_DESISTENTE = "UDSD"
 
+  MODERADOR = 5
+  ADMINISTRADOR = 8
+  OPERADOR_INATIVO = 0
+
   @dispositivo_primario = nil
   
   # Include default devise modules. Others available are:
@@ -17,18 +21,54 @@ class Usuario < ActiveRecord::Base
     :recoverable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :nome, :codigo_de_verificacao, :identificador_do_hardware, :numero_do_telefone
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :nome, :identificador_do_hardware, :numero_do_telefone, :tipo_operador, :denunciante_situacao
   attr_accessor :codigo_de_verificacao, :identificador_do_hardware, :numero_do_telefone
   
   has_many :dispositivos
   
-  validates_presence_of :nome
+  validates :nome,
+              :presence => true,
+              :unless => :denunciante?
+  validates :tipo_operador,
+              :inclusion => {:in => [MODERADOR, ADMINISTRADOR,OPERADOR_INATIVO]},
+              :allow_blank => true
+  validates :denunciante_situacao,
+              :inclusion => {:in => [DENUNCIANTE_BANIDO, DENUNCIANTE_CADASTRADO, DENUNCIANTE_DESISTENTE]},
+              :allow_blank => true
   validate :definicao_de_perfil
-  validate :verificar_existencia_do_dispositivo, :on => :create
-  validates_length_of :codigo_de_verificacao, :is => 6
+  validate :verificar_existencia_do_dispositivo,
+              :on => :create,
+              :if => :denunciante?
+  validate :codigo_de_verificacao,
+              :length => {:in => 1..6},
+              :on => :create,
+              :if => :denunciante?
   
-  after_create :enviar_email_de_confirmacao_de_cadastro, :associar_dispositivo_primario
-  
+  after_create :enviar_email_de_confirmacao_de_cadastro
+
+  after_create :associar_dispositivo_primario,
+                :if => :denunciante?
+
+  after_save :enviar_email_de_alteracao_de_tipo_de_operador,
+                :if => :operador?
+
+  scope :operadores, where("tipo_operador IN (?) ",[MODERADOR,ADMINISTRADOR,OPERADOR_INATIVO])
+  scope :moderadores, where(:tipo_operador => MODERADOR)
+  scope :administradores, where(:tipo_operador => ADMINISTRADOR)
+  scope :operadores_inativos, where(:tipo_operador => OPERADOR_INATIVO)
+
+  def moderador?
+    return (self.tipo_operador == Usuario::MODERADOR)
+  end
+
+  def administrador?
+    return (self.tipo_operador == Usuario::ADMINISTRADOR)
+  end
+
+  def operador?
+    return ([MODERADOR,ADMINISTRADOR,OPERADOR_INATIVO].include? self.tipo_operador)
+  end
+
   def denunciante?
     if (self.denunciante_situacao == DENUNCIANTE_CADASTRADO)
       return true
@@ -70,9 +110,13 @@ class Usuario < ActiveRecord::Base
       errors[:base] << "Somente usuários com situação CADASTRADO podem ser alterados para DESISTENTE."
     end
   end
-  
+
   def enviar_email_de_confirmacao_de_cadastro
     DengueAppMailer.conta_criada(self).deliver
+  end
+
+  def enviar_email_de_alteracao_de_tipo_de_operador
+    DengueAppMailer.notificar_alteracao_em_operador(self,"alterado").deliver
   end
 
   def associar_dispositivo(dispositivo)
@@ -85,7 +129,9 @@ class Usuario < ActiveRecord::Base
 
   private
   def definicao_de_perfil
-    # code here
+    if self.denunciante_situacao.blank? and self.tipo_operador.blank?
+      errors.add(:base, I18n.t('activerecord.errors.models.usuario.tipo_de_usuario_nao_definido'))
+    end
   end
 
   def associar_dispositivo_primario
