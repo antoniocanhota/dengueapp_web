@@ -21,7 +21,7 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Funções Administrativas<b class="caret"></b></a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li><%= (link_to "Gerenciar Denuncias", denuncias_path) if can? :manage, Denuncia %></li>
+            <li><%= (link_to "Gerenciar Denuncias", denuncias_path) if can? :update_situacao, Denuncia %></li>
             <li><%= (link_to "Gerenciar Operadores", operadores_path) if can? :manage, :operador%></li>
           </ul>
         </li>
