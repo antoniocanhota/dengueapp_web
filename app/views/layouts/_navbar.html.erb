@@ -4,29 +4,59 @@
       <!-- LINKS -->
       <%= link_to "DengueApp", root_path, :class => "brand" %>
       <div class="nav-collapse collapse" style="height: 0px;">
-      <ul class="nav">
-        <li><%= link_to "Estatísticas", estatisticas_denuncias_path %></li>
+      <ul class="nav" role="navigation">
+        <!-- DROPDOWN DENUNCIAS -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Denúncias<b class="caret"></b></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><%= (link_to "Denúncias dos Usuários", home_denunciante_path) if can? :minhas_denuncias, Denuncia%></li>
+            <% if usuario_atual and usuario_atual.denunciante? %>
+                <li><%= (link_to "Minhas Denúncias", denuncias_path(:usuario_id => usuario_atual.id)) if can? :minhas_denuncias, Denuncia %></li>
+            <% end %>
+            <% if usuario_atual and (usuario_atual.administrador? or usuario_atual.moderador?) %>
+                <li><%= (link_to "Gerenciar Denúncias", denuncias_path) if can? :index, Denuncia %></li>
+            <% end %>
+            <li><%= link_to "Estatísticas", estatisticas_denuncias_path %></li>
+          </ul>
+        </li>
+        <!-- DROPDOWN DENUNCIAS -> DROPDOWN FUNCOES ADMINISTRATIVAS -->
+        <% if usuario_atual.administrador? or usuario_atual.moderador? %>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Funções Administrativas<b class="caret"></b></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><%= (link_to "Gerenciar Denuncias", denuncias_path) if can? :index, Denuncia %></li>
+            <li><%= (link_to "Gerenciar Operadores", operadores_path) if can? :index, Operador%></li>
+          </ul>
+        </li>
+        <% end %>
+        <!-- DROPDOWN FUNCOES ADMINISTRAIVAS -> DOWNLOAD ANDROID -->
+        <li><%= link_to("Download do Aplicativo Android", download_path) %></li>
+        <!-- DOWNLOAD ADNROID -> DROPDOW AJUDA -->
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Ajuda<b class="caret"></b></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li><%= link_to "Sobre a Aplicação", conheca_a_aplicacao_path %></li>
+            <li><%= link_to "Contato", "https://docs.google.com/spreadsheet/viewform?fromEmail=true&formkey=dGloOVpIUThNN0tWWkhwZWNJQkl3ekE6MQ" %></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- DROPDOWN AJUDA -> DROPDOWN CONTA USUARIO/LOGIN -->
+      <ul class="nav pull-right">
         <% if usuario_atual %>
-          <li><%= (link_to "Gerenciar Denúncias", denuncias_path) if can? :index, Denuncia %></li>
-          <li><%= (link_to "Gerenciar Operadores", operadores_path) if can? :index, Operador%></li>
-          <li><%= (link_to "Todas as Denúncias", home_denunciante_path) if can? :minhas_denuncias, Denuncia%></li>
-          <li><%= (link_to "Minhas Denúncias", denuncias_path(:usuario_id => usuario_atual.id)) if can? :minhas_denuncias, Denuncia %></li>
-          <li><%= (link_to "ivos", dispositivos_path if current_user.denunciante?)%></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= usuario_atual.email %><b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li><%= (link_to "Meus Dispositivos", dispositivos_path if current_user.denunciante?)%></li>
+                <li><%= link_to('Sair', destroy_usuario_session_path, :method => :delete) %></li>
+              </ul>
+            </li>
+        <% else %>
+            <li><%= link_to('Acompanhar Minhas Denúncias', new_usuario_session_path)%></li>
         <% end %>
       </ul>
-      <!-- BOX DE LOGIN E SAIR-->
-      <ul class="nav pull-right">
-           <li><%= link_to ("Sobre a Aplicação"), conheca_a_aplicacao_path %></li>
-           <li><%= link_to("Download", download_path) %></li>
-           <li><%= link_to("Contato","https://docs.google.com/spreadsheet/viewform?fromEmail=true&formkey=dGloOVpIUThNN0tWWkhwZWNJQkl3ekE6MQ") %></li>
-      <% if usuario_atual %>
-          <li><%= link_to('Sair', destroy_usuario_session_path, :method => :delete) %></li>
-      <% else %>
-        <li><%= link_to('Acompanhar Minhas Denúncias', new_usuario_session_path)%></li>
-      <% end %>
-      </ul>
+      <!-- FIM MENUS/LINKS-->
       </div>
-      </div>
+    </div>
       
   </div>
 </div>
