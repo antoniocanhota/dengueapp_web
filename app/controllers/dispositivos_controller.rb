@@ -25,7 +25,7 @@ class DispositivosController < ApplicationController
         return
       end
       if dispositivo and dispositivo.usuario_id.blank?
-        dispositivo = params[:apelido]
+        dispositivo.apelido = params[:apelido]
         dispositivo.usuario_id = current_user.id
         if dispositivo.save
           redirect_to dispositivos_path, :notice => "Dispositivo vinculado com sucesso."
