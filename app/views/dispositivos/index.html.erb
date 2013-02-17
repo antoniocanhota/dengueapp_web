@@ -1,0 +1,50 @@
+<h1>Dispositivos</h1>
+<h3>Vincular Outro Dispositivo</h3>
+<div class="row-fluid">
+    <%= form_tag(vincular_dispositivos_path, :method => "put", :html => {:class => "form-horizontal"}) do %>
+        <%= label_tag(:numero_do_telefone, "Número do Telefone", :class => "control-label") %>
+        <div class="controls">
+            <%= text_field_tag :numero_do_telefone %>
+        </div>
+        <%= label_tag(:identificador_do_hardware, "IMEI", :class => "control-label") %>
+        <div class="controls">
+            <%= text_field_tag :identificador_do_hardware %>
+        </div>
+        <%= label_tag(:codigo_de_ativacao, "Código de Ativação", :class => "control-label") %>
+        <div class="controls">
+            <%= text_field_tag :codigo_de_ativacao %>
+        </div>
+        <%= label_tag(:apelido, "Apelido", :class => "control-label") %>
+        <div class="controls">
+            <%= text_field_tag :apelido %>
+        </div>
+        <%= submit_tag "Vincular", :class => "btn btn-primary" %>
+    <% end %>
+</div>
+<hr>
+<h3>Meus Dispositivos</h3>
+<div class="row-fluid">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Apelido</th>
+      <th>Data de Cadastro</th>
+      <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @dispositivos.each do |d| %>
+        <%= render "modal", :dispositivo => d %>
+        <tr>
+          <td><%= d.id %></td>
+          <td><%= d.apelido %></td>
+          <td><%=I18n.l d.created_at %></td>
+          <td><a href=<%="#modalUpdateApelidoDispositivo#{d.id}"%> role="button" data-toggle="modal" class="btn btn-mini">Alterar Apelido</a></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+

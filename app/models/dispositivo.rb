@@ -1,5 +1,6 @@
 #!/bin/env ruby
 # encoding: utf-8
+require 'digest'
 
 class Dispositivo < ActiveRecord::Base
   
@@ -14,7 +15,7 @@ class Dispositivo < ActiveRecord::Base
   end
 
   def self.find_all_by_identificador_do_hardware_real(identificador_do_hardware,codigo_de_verificacao)
-    identificador_do_hardware_codificado = Digest::SHA.hexdigest((identificador_do_hardware.to_i + codigo_de_verificacao.to_i).to_s)
+    identificador_do_hardware_codificado = Digest::SHA1.hexdigest((identificador_do_hardware.to_i + codigo_de_verificacao.to_i).to_s)
     dispositivo = Dispositivo.where(:identificador_do_hardware => identificador_do_hardware_codificado)
   end
 
