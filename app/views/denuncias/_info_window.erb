@@ -10,7 +10,8 @@
     <p style="color: black;">Enviada em <%= I18n.l denuncia.data_e_hora %></p>
         <p>
           <% if current_user.administrador? or current_user.moderador? %>
-            <%= link_to "Ver denúncias deste denunciante", denuncias_path(:dispositivo_id => denuncia.dispositivo_id, :usuario_id => denuncia.dispositivo.usuario_id), :class => "btn btn-mini btn-inverse" %>
+             <% dispositivo_id = denuncia.dispositivo_id if denuncia.dispositivo.usuario_id.blank? %>
+            <%= link_to "Ver denúncias deste denunciante", denuncias_path(:dispositivo_id => dispositivo_id, :usuario_id => denuncia.dispositivo.usuario_id), :class => "btn btn-mini btn-inverse" %>
           <% end %>
           <% if current_ability.can? :ativar, denuncia %>
             <%= link_to "Reativar", denuncia_update_situacao_path(denuncia, :situacao => Denuncia::ATIVA), :class => "btn btn-mini btn-success" %>

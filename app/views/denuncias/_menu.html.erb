@@ -1,19 +1,32 @@
 <div class="span2">
-  <ul class="nav nav-list">
-    <li class="nav-header">
-      Denúncias
-    </li>
-    <li class="<%= is_active?(denuncias_path(:situacao => Denuncia::ATIVA)) %>">
-      <%= link_to "Ativas", denuncias_path(:situacao => Denuncia::ATIVA) %>
-    </li>
-    <li class="<%= is_active?(denuncias_path(:situacao => Denuncia::REJEITADA)) %>">
-      <%= link_to "Rejeitadas", denuncias_path(:situacao => Denuncia::REJEITADA)  %>
-    </li>
-    <li class="<%= is_active?(denuncias_path(:situacao => Denuncia::CANCELADA)) %>">
-      <%= link_to "Canceladas", denuncias_path(:situacao => Denuncia::CANCELADA)  %>
-    </li>
-    <li class="<%= is_active?(denuncias_path(:situacao => Denuncia::RESOLVIDA)) %>">
-      <%= link_to "Resolvidas", denuncias_path(:situacao => Denuncia::RESOLVIDA)  %>
-    </li>
-  </ul>
+
+    <h4>Pesquisar</h4>
+    <hr>
+    <%= form_tag(denuncias_path, :method => "get") do %>
+        <%= label_tag :situacao, "Situação" %>
+        <%= select_tag(:situacao,options_for_select([
+                 ['Ativas',Denuncia::ATIVA],
+                 ['Rejeitadas',Denuncia::REJEITADA],
+                 ['Canceladas',Denuncia::CANCELADA],
+                 ['Resolvidas', Denuncia::RESOLVIDA]],
+                    :selected => params[:situacao]),
+            :include_blank => true) %>
+          <%= label_tag(:usuario_id, "ID do Usuário") %>
+          <div class="input-prepend">
+            <span class="add-on">#</span>
+            <%= text_field_tag :usuario_id, params[:usuario_id], :class => "input-mini" %>
+          </div>
+          <%= label_tag(:usuario_id, "ID do Dispositivo") %>
+          <div class="input-prepend">
+            <span class="add-on">#</span>
+            <%= text_field_tag :usuario_id, params[:dispositivo_id], :class => "input-mini" %>
+          </div>
+          <%= label_tag(:usuario_id, "ID da Denúncia") %>
+          <div class="input-prepend">
+            <span class="add-on">#</span>
+            <%= text_field_tag :denuncia_id, params[:denuncia_id], :class => "input-mini" %>
+          </div>
+          <br /><%= submit_tag "Pesquisar", :class => 'btn btn-primary' %>
+    <% end %>
+
 </div>

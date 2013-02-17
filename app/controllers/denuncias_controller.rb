@@ -17,7 +17,7 @@ class DenunciasController < ApplicationController
       when Denuncia::RESOLVIDA
         @denuncias = @denuncias.resolvidas
     end
-    if params[:usuario_id]
+    if !params[:usuario_id].blank?
       @denuncias = @denuncias.do_usuario(params[:usuario_id])
     end
     @denuncias = @denuncias.to_gmaps4rails do |denuncia,marker|
@@ -41,10 +41,9 @@ class DenunciasController < ApplicationController
       msg_de_erro = "Você não possui permissão para mudar a situação da denúncia ##{params[:denuncia_id]} para a situação desejada."
     end
     if msg_de_erro.empty?
-      redirect_to :back#, :notice => "Situação da denúncia ##{params[:denuncia_id]} alterada com sucesso."
-      flash.now[:notice] = "Situação da denúncia ##{params[:denuncia_id]} alterada com sucesso."
+      redirect_to :back, :notice => "Situação da denúncia ##{params[:denuncia_id]} alterada com sucesso."
     else
-      redirect_to :back, :error => msg_de_erro
+      redirect_to :back, :alert => msg_de_erro
     end
   end
 
