@@ -2,9 +2,8 @@
   <%= render "menu" %>
   <div class="span10">
     <%- model_class = @operador.class -%>
-    <div class="page-header">
-      <h1>Editar Dados do Operador #<%= @operador.id %></h1>
-    </div>
+    <h4>Editar Dados do Operador #<%= @operador.id %></h4>
+    <hr>
         <%= form_for @operador ,:url => operador_path(@operador), :method => :put ,:html => { :class => 'form-horizontal' } do |f| %>
             <%= render 'form', :f => f %>
         <% end %>

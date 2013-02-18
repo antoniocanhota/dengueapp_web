@@ -1,12 +1,10 @@
 <div class="span2">
+  <h4>Opções</h4>
+  <hr>
   <ul class="nav nav-list">
-    <li class="nav-header">
-      Operadores
-    </li>
     <li class="<%= is_active?(operadores_path) %>">
-      <%= link_to "Listagem", operadores_path %>
+      <%= link_to "Listar Todos os Operadores", operadores_path %>
     </li>
-    <li class="divider"></li>
     <li class="<%= is_active?(new_operador_path) %>">
       <%= link_to "Cadastrar Operador", new_operador_path %>
     </li>
