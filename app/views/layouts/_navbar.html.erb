@@ -13,7 +13,7 @@
             <% if usuario_atual and usuario_atual.denunciante? %>
                 <li><%= (link_to "Minhas Denúncias", denuncias_path(:usuario_id => usuario_atual.id)) %></li>
             <% end %>
-            <li><%= link_to "Estatísticas", estatisticas_denuncias_path %></li>
+            <li><%= link_to "Estatísticas", estatisticas_path %></li>
           </ul>
         </li>
         <!-- DROPDOWN DENUNCIAS -> DROPDOWN FUNCOES ADMINISTRATIVAS -->

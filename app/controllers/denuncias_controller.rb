@@ -47,10 +47,4 @@ class DenunciasController < ApplicationController
     end
   end
 
-  def estatisticas
-    @denuncias_por_bairro = Denuncia.ativas.group(:bairro).count.to_a
-    @denuncias_por_cidade = Denuncia.ativas.group(:cidade).count.to_a
-    @denuncias_por_dia
-  end
-
 end

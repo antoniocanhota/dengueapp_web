@@ -5,7 +5,6 @@ class Ability
     usuario ||= Usuario.new # guest user (not logged in)
     cannot :manage, :all
     can :read, Denuncia, :situacao => Denuncia::ATIVA
-    can :estatisticas, Denuncia
     if (usuario.moderador? or usuario.administrador?)
       can [:index,:update_situacao], Denuncia
       #cannot [:abandonar,:cancelar,:resolver], Denuncia

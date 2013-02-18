@@ -3,6 +3,7 @@ Dengueapp::Application.routes.draw do
   match "download" => "public#download", :as => "download"
   match "download/android" => "public#download_android", :as => "download_android"
   match "conheca_a_aplicacao" => "public#conheca_a_aplicacao", :as => "conheca_a_aplicacao"
+  match "estatisticas" => "public#estatisticas", :as => "estatisticas"
 
   match "acesso_negado" => "application#acesso_negado", :as => "acesso_negado"
   
@@ -23,7 +24,6 @@ Dengueapp::Application.routes.draw do
   match 'denuncias/:id/rejeitar' => 'denuncias#rejeitar', :as => "rejeitar_denuncia"
   match 'denuncias/:id/reativar' => 'denuncias#reativar', :as => "reativar_denuncia"
   resources :denuncias do
-    get 'estatisticas', :on => :collection
     get 'update_situacao'
   end
 
