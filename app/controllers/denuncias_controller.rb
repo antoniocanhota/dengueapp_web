@@ -6,7 +6,7 @@ class DenunciasController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @denuncias = Denuncia.accessible_by(current_ability,:manage)
+    @denuncias = Denuncia.accessible_by(current_ability,:update_situacao)
     if !params[:situacao].blank?
       @denuncias = @denuncias.where(:situacao => params[:situacao])
     end

@@ -12,6 +12,7 @@
                     :selected => params[:situacao]),
             :include_blank => true) %>
 
+      <% if usuario_atual.moderador? or usuario_atual.administrador? %>
           <%= label_tag(:usuario_id, "ID do Usuário") %>
           <div class="input-prepend">
             <span class="add-on">#</span>
@@ -29,7 +30,9 @@
             <span class="add-on">#</span>
             <%= text_field_tag :denuncia_id, params[:denuncia_id], :class => "input-mini" %>
           </div>
-
+       <% else %>
+            <% hidden_field_tag :usuario_id, params[:usuario_id] %>
+       <% end %>
           <br /><%= submit_tag "Pesquisar", :class => 'btn btn-primary' %>
     <% end %>
 

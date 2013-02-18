@@ -11,7 +11,7 @@
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <li><%= link_to "Denúncias dos Usuários", root_path %></li>
             <% if usuario_atual and usuario_atual.denunciante? %>
-                <li><%= (link_to "Minhas Denúncias", denuncias_path(:usuario_id => usuario_atual.id)) if can? :minhas_denuncias, Denuncia %></li>
+                <li><%= (link_to "Minhas Denúncias", denuncias_path(:usuario_id => usuario_atual.id)) %></li>
             <% end %>
             <li><%= link_to "Estatísticas", estatisticas_denuncias_path %></li>
           </ul>

@@ -9,7 +9,7 @@
     </h4>
     <p style="color: black;">Enviada em <%= I18n.l denuncia.data_e_hora %></p>
         <p>
-          <% if current_user.administrador? or current_user.moderador? %>
+          <% if current_user and (current_user.administrador? or current_user.moderador?) %>
              <% dispositivo_id = denuncia.dispositivo_id if denuncia.dispositivo.usuario_id.blank? %>
             <%= link_to "Ver denúncias deste denunciante", denuncias_path(:dispositivo_id => dispositivo_id, :usuario_id => denuncia.dispositivo.usuario_id), :class => "btn btn-mini btn-inverse" %>
           <% end %>
