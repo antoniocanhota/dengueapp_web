@@ -5,15 +5,6 @@ class Ability
     usuario ||= Usuario.new # guest user (not logged in)
     cannot :manage, :all
     can :read, Denuncia, :situacao => Denuncia::ATIVA
-    if (usuario.moderador? or usuario.administrador?)
-      can [:index,:update_situacao], Denuncia
-      #cannot [:abandonar,:cancelar,:resolver], Denuncia
-      can :ativar, Denuncia, :situacao => Denuncia::REJEITADA
-      can :rejeitar, Denuncia, :situacao => Denuncia::ATIVA
-      if usuario.administrador?
-        can :manage, :operador
-      end
-    end
     if usuario.denunciante?
       can [:index,:update_situacao], Denuncia, ("dispositivo_id in (select id from dispositivos where usuario_id = #{usuario.id})") do |d|
         d.dispositivo.usuario_id == usuario.id
@@ -27,6 +18,17 @@ class Ability
         d.dispositivo.usuario_id == usuario.id and d.situacao == Denuncia::ATIVA
       end
       can :manage, Dispositivo, :usuario_id => usuario.id
+    end
+    if (usuario.moderador? or usuario.administrador?)
+      can [:index,:update_situacao], Denuncia
+      #cannot [:abandonar,:cancelar,:resolver], Denuncia
+      can :ativar, Denuncia, :situacao => Denuncia::REJEITADA
+      can :rejeitar, Denuncia, :situacao => Denuncia::ATIVA
+      can :index, :denunciante
+      can :banir, :denunciante
+      if usuario.administrador?
+        can :manage, :operador
+      end
     end
 
     # The first argument to `can` is the action you are giving the user permission to do.
