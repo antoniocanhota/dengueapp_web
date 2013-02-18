@@ -1,14 +1,4 @@
-<div id="div_do_mapa_grande" class="fill_screen">
-  <script type="text/javascript">
-      var divHeight = document.documentElement.clientHeight;
-      document.getElementById('div_do_mapa_grande').style.height = (divHeight-100+29)+"px";
-  </script>
-  <%= mapa_do_grande_rio(@denuncias) %>
-</div>
-
-<% @denuncias_objeto.each do |d| %>
-<%= render :partial => "denuncias/modal", :locals => {:d => d} %>
-<% end %>
+<%= render "denuncias/mapa_fill_screen", :denuncias => @denuncias, :denuncias_objeto => @denuncias_objeto %>
 <% if cookies[:hide_modal] != "true" %>
 <script type="text/javascript">
     $(window).load(function(){
