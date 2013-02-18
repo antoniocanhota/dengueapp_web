@@ -3,7 +3,15 @@
       var divHeight = document.documentElement.clientHeight;
       document.getElementById('mapa_fill_screen').style.height = (divHeight-100+29)+"px";
   </script>
-  <%= mapa_do_grande_rio(denuncias) %>
+  <%= gmaps("map_options" => {
+            :center_latitude => "-22.890209",
+            :center_longitude => "-43.296562",
+            :type => "HYBRID",
+            :zoom => 11,
+            :auto_adjust => false
+            },
+            :markers => {"data" => denuncias}
+      ) %>
 </div>
 
 <% denuncias_objeto.each do |d| %>

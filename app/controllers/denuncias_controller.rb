@@ -7,19 +7,19 @@ class DenunciasController < ApplicationController
 
   def index
     @denuncias = Denuncia.accessible_by(current_ability,:manage)
-    case params[:situacao]
-      when Denuncia::ATIVA
-        @denuncias = @denuncias.ativas
-      when Denuncia::REJEITADA
-        @denuncias = @denuncias.rejeitadas
-      when Denuncia::CANCELADA
-        @denuncias = @denuncias.canceladas
-      when Denuncia::RESOLVIDA
-        @denuncias = @denuncias.resolvidas
+    if !params[:situacao].blank?
+      @denuncias = @denuncias.where(:situacao => params[:situacao])
     end
     if !params[:usuario_id].blank?
       @denuncias = @denuncias.do_usuario(params[:usuario_id])
     end
+    if !params[:dispositivo_id].blank?
+      @denuncias = @denuncias.where(:dispositivo_id => params[:dispositivo_id])
+    end
+    if !params[:denuncia_id].blank?
+      @denuncias = @denuncias.where(:id => params[:denuncia_id])
+    end
+    @denuncias_objeto = @denuncias
     @denuncias = @denuncias.to_gmaps4rails do |denuncia,marker|
       marker.infowindow render_to_string(:partial => 'info_window', :locals => {:denuncia => denuncia})
     end
