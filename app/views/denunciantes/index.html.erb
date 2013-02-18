@@ -1,0 +1,59 @@
+<div class="row-fluid">
+  <%= render "menu" %>
+  <div class="span10">
+    <h4>Gerenciar Denunciantes</h4>
+    <hr>
+    <div class="row-fluid">
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr>
+          <th colspan="3">Dados do Dispositivo</th>
+          <th colspan="3">Dados do Denunciante</th>
+          <th rowspan="2">Observações</th>
+          <th rowspan="2">Ações</th>
+        </tr>
+        <tr>
+          <th>ID</th>
+          <th>Data de Cadastro</th>
+          <th>Situação</th>
+          <th>ID</th>
+          <th>Data de Cadastro</th>
+          <th>Situação</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @denunciantes.each do |d| %>
+            <tr>
+              <td><%= "##{d.id}" %></td>
+              <td><%=I18n.l d.created_at %></td>
+              <td><%= badge_de_situacao_de_dispositivo(d.situacao) %></td>
+              <% if d.usuario %>
+              <td><%= "##{d.usuario_id}" %></td>
+              <td><%= I18n.l d.usuario.created_at %></td>
+              <td><%= badge_de_situacao_de_usuario(d.usuario.denunciante_situacao) %></td>
+              <% else %>
+                <td colspan="3">Não há usuário vinculado</td>
+              <% end %>
+              <td>
+                <% if d.banivel? or (d.usuario and d.usuario.banivel?) %>
+                    <span class='badge badge-warning'>Banível</span>
+                <% else %>
+                    &nbsp;
+                <% end %>
+              </td>
+              <td>
+                <% if d.usuario %>
+                    <%= link_to "Ver Denúncias do Usuário", denuncias_path(:usuario_id => d.usuario_id), :class => 'btn btn-mini btn-primary' %>
+                    <%= link_to "Banir Usuário", banir_denunciantes_path(:usuario_id => d.usuario), :class => 'btn btn-danger btn-mini' if d.usuario.banivel? %>
+                <% else %>
+                    <%= link_to "Ver Denúncias do Dispositivo", denuncias_path(:dispositivo_id => d.id), :class => 'btn btn-mini btn-primary' %>
+                    <%= link_to "Banir Dispositivo", banir_denunciantes_path(:dispositivo_id => d), :class => 'btn btn-danger btn-mini' if d.banivel? %>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  </div>
+</div>
+</div>

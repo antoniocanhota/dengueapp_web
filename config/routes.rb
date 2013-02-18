@@ -1,5 +1,7 @@
 Dengueapp::Application.routes.draw do
 
+  get "denunciantes/index"
+
   match "download" => "public#download", :as => "download"
   match "download/android" => "public#download_android", :as => "download_android"
   match "conheca_a_aplicacao" => "public#conheca_a_aplicacao", :as => "conheca_a_aplicacao"
@@ -25,6 +27,10 @@ Dengueapp::Application.routes.draw do
   match 'denuncias/:id/reativar' => 'denuncias#reativar', :as => "reativar_denuncia"
   resources :denuncias do
     get 'update_situacao'
+  end
+
+  resources :denunciantes, :only => [:index] do
+    get 'banir', :on => :collection
   end
 
   resources :dispositivos do

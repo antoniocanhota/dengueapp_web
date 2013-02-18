@@ -77,14 +77,6 @@ class Usuario < ActiveRecord::Base
     end
   end
 
-  def banivel?
-    if (self.denunciante?) and (self.denuncias.rejeitadas.count >= 3) and (self.denunciante_situacao == DENUNCIANTE_CADASTRADO)
-      return true
-    else
-      return false
-    end
-  end
-
   def banir
     if self.banivel?
       ActiveRecord::Base.transaction do

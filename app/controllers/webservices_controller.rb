@@ -24,6 +24,7 @@ class WebservicesController < ApplicationController
       @denuncia.dispositivo = dispositivo
     else
       dispositivo = @denuncia.build_dispositivo(params[:dispositivo])
+      dispositivo.situacao = Dispositivo::CADASTRADO
     end
     #Fim da montagem da denúncia
     respond_to do |format|

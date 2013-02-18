@@ -7,6 +7,8 @@ class Denuncia < ActiveRecord::Base
   REJEITADA = "DNSR"
   CANCELADA = "DNSC"
   RESOLVIDA = "DNSS"
+
+  QTD_DENUNCIAS_REJEITADAS_PARA_BANIR_DENUNCIANTE = 3
   
   belongs_to :dispositivo
   has_attached_file :foto,
@@ -21,6 +23,7 @@ class Denuncia < ActiveRecord::Base
 
   before_save :identificar_bairro_e_cidade
   before_create :atribuir_valores_iniciais
+  after_save :atualizar_banilidade_do_usuario_ou_dispositivo
   
   scope :ativas, where(:situacao => Denuncia::ATIVA)
   scope :rejeitadas, where(:situacao => Denuncia::REJEITADA)
@@ -104,18 +107,29 @@ class Denuncia < ActiveRecord::Base
   private
 
   def identificar_bairro_e_cidade
-    #TODO: Remover esses 'puts'
-    puts "entrei no método"
     if (self.new_record? or self.changes.include? "latitude" or self.changes.include? "longitude")
-      puts "indo no google"
       endereco_geocodificado = Gmaps4rails.geocode("#{self.latitude},#{self.longitude}").first
-      puts "já fui no google"
       endereco_geocodificado[:full_data]["address_components"].each do |c|
         self.bairro = c["long_name"] if c["types"].include? "sublocality"
         self.cidade = c["long_name"] if c["types"].include? "locality"
       end
     end
-    puts "saindo do método"
+  end
+
+  def atualizar_banilidade_do_usuario_ou_dispositivo
+    if self.changes.include? "situacao" and self.situacao == REJEITADA
+      if self.dispositivo.usuario_id
+        qtd_denuncias_rejeitadas = Denuncia.do_usuario(self.dispositivo.usuario_id).where(:situacao => REJEITADA).count
+        if qtd_denuncias_rejeitadas >= QTD_DENUNCIAS_REJEITADAS_PARA_BANIR_DENUNCIANTE
+          self.dispositivo.usuario.update_attribute(:banivel,true)
+        end
+      else
+        qtd_denuncias_rejeitadas = self.dispositivo.denuncias.where(:situacao => REJEITADA).count
+        if qtd_denuncias_rejeitadas >= QTD_DENUNCIAS_REJEITADAS_PARA_BANIR_DENUNCIANTE
+          self.dispositivo.update_attribute(:banivel,true)
+        end
+      end
+    end
   end
 
 end

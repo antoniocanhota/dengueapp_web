@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130217195149) do
+ActiveRecord::Schema.define(:version => 20130218023613) do
 
   create_table "denuncias", :force => true do |t|
     t.datetime "data_e_hora"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(:version => 20130217195149) do
     t.datetime "updated_at"
     t.integer  "usuario_id"
     t.string   "apelido"
+    t.string   "situacao"
+    t.boolean  "banivel"
   end
 
   create_table "usuarios", :force => true do |t|
@@ -56,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20130217195149) do
     t.string   "denunciante_situacao",   :limit => 4
     t.integer  "tipo_operador"
     t.integer  "operador_situacao",                     :default => 1
+    t.boolean  "banivel"
   end
 
   add_index "usuarios", ["email"], :name => "index_usuarios_on_email", :unique => true

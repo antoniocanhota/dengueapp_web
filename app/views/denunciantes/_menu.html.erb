@@ -1,0 +1,25 @@
+<div class="span2">
+
+    <h4>Pesquisar</h4>
+    <hr>
+    <%= form_tag(denunciantes_path, :method => "get") do %>
+
+          <%= label_tag(:apenas_baniveis, "Mostrar Apenas Baníveis") %>
+          <%= check_box_tag(:apenas_baniveis, true, params[:apenas_baniveis]) %><br /><br/>
+
+          <%= label_tag(:usuario_id, "ID do Usuário") %>
+          <div class="input-prepend">
+            <span class="add-on">#</span>
+            <%= text_field_tag :usuario_id, params[:usuario_id], :class => "input-mini" %>
+          </div>
+
+          <%= label_tag(:dispositivo_id, "ID do Dispositivo") %>
+          <div class="input-prepend">
+            <span class="add-on">#</span>
+            <%= text_field_tag :dispositivo_id, params[:dispositivo_id], :class => "input-mini" %>
+          </div>
+
+          <br /><%= submit_tag "Pesquisar", :class => 'btn btn-primary' %>
+    <% end %>
+
+</div>
