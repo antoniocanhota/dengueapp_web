@@ -45,7 +45,6 @@ class Usuario < ActiveRecord::Base
               :if => :denunciante?
   validate :banibilidade,
            :if => :banindo?
-  validate :alteracao_de_situacao
   
   after_create :enviar_email_de_confirmacao_de_cadastro
 

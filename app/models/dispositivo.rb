@@ -16,7 +16,6 @@ class Dispositivo < ActiveRecord::Base
               :inclusion => {:in => [CADASTRADO,BANIDO]}
   validate :banibilidade,
               :if => :banindo?
-  validate :alteracao_de_situacao
 
   def self.find_all_by_numero_do_telefone_real(numero_do_telefone,codigo_de_verificacao)
     numero_do_telefone_codificado = Digest::SHA1.hexdigest((numero_do_telefone.to_i + codigo_de_verificacao.to_i).to_s)
