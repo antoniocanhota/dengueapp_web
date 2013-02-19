@@ -80,16 +80,14 @@ class Usuario < ActiveRecord::Base
   end
 
   def banir
-    if self.banivel?
-      ActiveRecord::Base.transaction do
-        self.update_attribute(:denunciante_situacao,DENUNCIANTE_BANIDO)
-        self.denuncias.ativas.each do |d|
-          d.rejeitar
-        end
+    self.denunciante_situacao = DENUNCIANTE_BANIDO
+    self.dispositivos.each do |di|
+      di.situacao = Dispositivo::BANIDO
+      di.denuncias.each do |d|
+        d.situacao = Denuncia::REJEITADA if d.situacao == Denuncia::ATIVA
       end
-    else
-      errors[:base] << "Somente usuários com situação CADASTRADO e pelo menos 3 denúncias rejeitadas podem ser banidos."
     end
+    self.save
   end
 
   def desistir

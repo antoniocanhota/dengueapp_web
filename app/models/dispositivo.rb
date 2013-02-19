@@ -27,6 +27,14 @@ class Dispositivo < ActiveRecord::Base
     dispositivo = Dispositivo.where(:identificador_do_hardware => identificador_do_hardware_codificado)
   end
 
+  def banir
+    self.situacao = BANIDO
+    self.denuncias.each do |d|
+      d.situacao = Denuncia::REJEITADA if d.situacao == Denuncia::ATIVA
+    end
+    self.save
+  end
+
   private
   
   def codificar_numero_de_telefone_e_identificador_do_hardware

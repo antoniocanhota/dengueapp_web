@@ -25,14 +25,12 @@ class DenunciantesController < ApplicationController
   def banir
     if params[:dispositivo_id]
       dispositivo = Dispositivo.find(params[:dispositivo_id])
-      dispositivo.situacao = Dispositivo::BANIDO
-      unless dispositivo.save
+      unless dispositivo.banir
         erro = dispositivo.errors.full_messages
       end
     elsif params[:usuario_id]
       usuario = Usuario.find(params[:usuario_id])
-      usuario.denunciante_situacao = Usuario::DENUNCIANTE_BANIDO
-      unless usuario.save
+      unless usuario.banir
         erro = usuario.errors.full_messages
       end
     end
