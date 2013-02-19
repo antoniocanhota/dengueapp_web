@@ -43,6 +43,9 @@ class Usuario < ActiveRecord::Base
               :length => {:in => 1..6},
               :on => :create,
               :if => :denunciante?
+  validate :banibilidade,
+           :if => :banindo?
+  validate :alteracao_de_situacao
   
   after_create :enviar_email_de_confirmacao_de_cadastro
 
@@ -144,6 +147,17 @@ class Usuario < ActiveRecord::Base
       if @dispositivo_primario.nil?
         errors.add(:base, I18n.t('activerecord.errors.models.usuario.dispositivo_nao_encontrado'))
       end
+    end
+  end
+
+  def banindo?
+    return (self.changes.include? "denunciante_situacao" and self.situacao == BANIDO)
+  end
+
+  def banibilidade
+    denuncias_do_usuario = Denuncia.do_usuario(self.id)
+    unless (!denuncias_do_usuario.empty? and denuncias_do_usuario.rejeitadas.count >= Denuncia::QTD_DENUNCIAS_REJEITADAS_PARA_BANIR_DENUNCIANTE)
+      errors.add(:denunciante_situacao, I18n.t('activerecord.errors.models.usuarios.attributes.denunciante_situacao.nao_banivel'))
     end
   end
   
