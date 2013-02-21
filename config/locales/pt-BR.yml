@@ -218,6 +218,7 @@ pt-BR:
         email: "E-mail"
         password: "Senha"
         password_confirmation: "Confirmação da Senha"
+        current_password: "Senha Atual"
         numero_do_telefone: "Telefone"
         identificador_do_hardware: "IMEI"
         codigo_de_verificacao: "Código de Verificação"

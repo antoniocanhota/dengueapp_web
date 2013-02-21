@@ -5,20 +5,21 @@
 
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
       <%= devise_error_messages! %>
-
-      <div><%= f.label :email %><br />
-        <%= f.email_field :email %></div>
-
-      <div><%= f.label :password %> <i>(deixe em branco caso não deseje alterar)</i><br />
-        <%= f.password_field :password %></div>
-
-      <div><%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation %></div>
-
-      <div><%= f.label :current_password %> <i>(precisamos que informe sua senha atual para confirmar as mudanças)</i><br />
-        <%= f.password_field :current_password %></div>
-
-      <div><%= f.submit "Update" %></div>
+        <fieldset>
+          <%= f.label :nome %>
+          <%= f.text_field :nome, :class => "input-xlarge" %>
+          <%= f.label :email %>
+          <%= f.email_field :email, :class => "input-xlarge"  %>
+          <%= f.label :password %>
+          <%= f.password_field :password, :class => "input-xlarge"  %>
+          <span class="help-block">(deixe em branco caso não deseje alterar)</span>
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, :class => "input-xlarge"  %>
+          <%= f.label :current_password %>
+          <%= f.password_field :current_password, :class => "input-xlarge"  %>
+          <span class="help-block">(precisamos que informe sua senha atual para confirmar as mudanças)</span>
+          <%= f.submit "Salvar", :class => "btn btn-success" %>
+        </fieldset>
   <% end %>
 </div>
 <div class="span4">
