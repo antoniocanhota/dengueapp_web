@@ -90,16 +90,14 @@ class Usuario < ActiveRecord::Base
     self.save
   end
 
-  def desistir
-    if self.denunciante_situacao == DENUNCIANTE_CADASTRADO
-      ActiveRecord::Base.transaction do
-        self.update_attribute(:denunciante_situacao,DENUNCIANTE_CESISTENTE)
-        self.denuncias.ativas.each do |d|
-          d.cancelar
-        end
+  def cancelar_conta
+    self.tipo_operador = OPERADOR_INATIVO if (self.moderador? or self.administrador?)
+    if self.denunciante?
+      self.denunciante_situacao = DENUNCIANTE_DESISTENTE
+      self.denuncias.each do |d|
+        d.situacao = Denuncia::CANCELADA if d.situacao == Denuncia::ATIVA
       end
-    else
-      errors[:base] << "Somente usuários com situação CADASTRADO podem ser alterados para DESISTENTE."
+      self.save
     end
   end
 

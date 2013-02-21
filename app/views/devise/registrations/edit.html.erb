@@ -1,25 +1,40 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="row-fluid">
+<div class="span8">
+  <h4>Alterar Dados da Minha Conta</h4>
+  <hr>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+      <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+      <div><%= f.label :email %><br />
+        <%= f.email_field :email %></div>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password %></div>
+      <div><%= f.label :password %> <i>(deixe em branco caso não deseje alterar)</i><br />
+        <%= f.password_field :password %></div>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+      <div><%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation %></div>
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></div>
+      <div><%= f.label :current_password %> <i>(precisamos que informe sua senha atual para confirmar as mudanças)</i><br />
+        <%= f.password_field :current_password %></div>
 
-  <div><%= f.submit "Update" %></div>
-<% end %>
+      <div><%= f.submit "Update" %></div>
+  <% end %>
+</div>
+<div class="span4">
+    <h4>Cancelar Conta</h4>
+    <hr>
+    No caso de cancelamento da conta:<br>
+    <ul>
+      <li>todas as suas denúncias ativas serão colocadas como canceladas e não serão mais visíveis para outros usuários</li>
+      <li>você ainda poderá publicar novas denúncias</li>
+      <li>seus dispositivos associados não poderão ser usados por outros usuários - se quiserem associar esses dispositivos, terão que ou formatar o aparelho, ou reinstalar a aplicação, ou trocar o número de telefone</li>
+      <li>poderá voltar a usar o DengueApp a qualquer momento</li>
+    <% if usuario_atual.administrador? or usuario_atual.moderador? %>
+      <li>como você possui um perfil com funções administrativas, estas também serão desativadas.</li>
+    <% end %>
+    </ul>
+  <p><%= link_to "Desejo cancelar minha conta", cancelar_usuario_registration_path(usuario_atual.id), :confirm => "Prosseguir?", :class => "btn btn-danger" %></p>
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
-
-<%= link_to "Back", :back %>
+</div>
+</div>
