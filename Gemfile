@@ -45,10 +45,11 @@ end
 group :production do
   gem 'pg'
   gem 'thin'
-  gem 'exception_notification'
+
 end
 
 gem 'jquery-rails'
+gem 'exception_notification'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
