@@ -8,8 +8,8 @@ class ChangeModeradorAndAdministradorFromUsuarios < ActiveRecord::Migration
         u.update_attribute(:tipo_operador,Usuario::MODERADOR)
       end
     end
-    remove_column :usuarios, :administrador
-    remove_column :usuarios, :moderador
+    #remove_column :usuarios, :administrador
+    #remove_column :usuarios, :moderador
   end
 
   def down
