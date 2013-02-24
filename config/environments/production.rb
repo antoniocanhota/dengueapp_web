@@ -1,3 +1,5 @@
+require 'exception_notifier'
+
 Dengueapp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -59,4 +61,10 @@ Dengueapp::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  config.middleware.use ExceptionNotifier,
+                        :email_prefix => "[Erro Dengueapp]",
+                        :sender_address => %{"DengueApp (Exception Notification)" <dengueapp@gmail.com>} ,
+                        :exception_recipients => %w{antoniocanhota@gmail.com}
+
 end
