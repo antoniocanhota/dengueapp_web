@@ -15,7 +15,7 @@ class Denuncia < ActiveRecord::Base
     :storage => :dropbox,
     :dropbox_credentials => "#{Rails.root}/config/dropbox.yml",
     :dropbox_options => {
-      :path => proc { "foto_denuncia_#{id}" }
+      :path => proc { "foto_denuncia_#{Rails.env}_#{id}" }
     }
   accepts_nested_attributes_for :dispositivo
   
