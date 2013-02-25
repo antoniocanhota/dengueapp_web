@@ -8,10 +8,6 @@
 usuario = Usuario.create(:email => 'admin@mail.com', 
   :nome => 'Administrador Inicial',
   :password => 'admin123',
-  :password_confirmation => 'admin123'
-)
-Operador.create(
-  :usuario_id => usuario.id,
-  :tipo => Operador::ADMINISTRADOR,
-  :situacao => Operador::ATIVO
+  :password_confirmation => 'admin123',
+  :tipo_operador => Usuario::ADMINISTRADOR
 )
