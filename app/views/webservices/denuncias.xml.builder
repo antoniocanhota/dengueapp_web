@@ -8,6 +8,7 @@ xml.denuncias do
 	     xml.latitude d.latitude
 	     xml.longitude d.longitude
 	     xml.url_imagem d.foto.url
+       xml.situacao d.situacao
 	    end
     end
   end

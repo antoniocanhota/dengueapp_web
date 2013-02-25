@@ -10,7 +10,6 @@ Dengueapp::Application.routes.draw do
   match "acesso_negado" => "application#acesso_negado", :as => "acesso_negado"
   
   match "webservices/denuncias" => "webservices#denuncias", :as => "webservice_denuncias"
-  match "webservices/denuncias_do_usuario/:identificador_do_android" => "webservices#denuncias_do_usuario", :as => "webservice_denuncias_do_usuario"
   match "webservices/denuncias/publicar" => "webservices#publicar_denuncia", :as => "webservice_publicar_denuncia", :via => :post
   match "webservices/registro_do_dispositivo/:identificador_do_android" => "webservices#registro_do_dispositivo", :as => "webservice_registro_do_dispositivo"
 
