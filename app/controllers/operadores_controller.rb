@@ -18,7 +18,7 @@ class OperadoresController < ApplicationController
     @operador.password_confirmation = @operador.password = Usuario::SENHA_PADRAO
     if @operador.save
       DengueAppMailer.notificar_alteracao_em_operador(@operador,"ativado").deliver
-      redirect_to @operador, :notice => "Operador ##{@operador.id} cadastrado  com sucesso."
+      redirect_to operadores_path, :notice => "Operador ##{@operador.id} cadastrado  com sucesso."
     else
       render :action => "new"
     end
