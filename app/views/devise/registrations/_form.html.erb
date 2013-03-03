@@ -66,6 +66,8 @@
 	</div>
 </div>
 
+<%= f.hidden_field :denunciante_situacao, Usuario::DENUNCIANTE_CADASTRADO %>
+
 <div class="control-group">
 	<div class="controls">
 		<%= f.submit "Cadastrar", :class => "btn btn-success btn-large", :disable_with => "Cadastrando..."%>
