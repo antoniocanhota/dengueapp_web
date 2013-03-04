@@ -21,8 +21,8 @@ class Usuario < ActiveRecord::Base
     :recoverable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :nome, :identificador_do_hardware, :numero_do_telefone, :tipo_operador, :denunciante_situacao
-  attr_accessor :codigo_de_verificacao, :identificador_do_hardware, :numero_do_telefone
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :nome, :identificador_do_hardware, :numero_do_telefone, :tipo_operador, :denunciante_situacao, :codigo_de_verificacao
+  attr_accessor :identificador_do_hardware, :numero_do_telefone
   
   has_many :dispositivos
   
@@ -132,7 +132,7 @@ class Usuario < ActiveRecord::Base
     if self.numero_do_telefone.blank? and self.identificador_do_hardware.blank?
       errors.add(:base, I18n.t('activerecord.errors.models.usuario.numero_de_telefone_e_identificador_de_hardware_em_branco'))
     elsif self.codigo_de_verificacao.blank?
-      errors.add(:base, I18n.t('activerecord.errors.models.usuario.codigo_de_verificacao_em_branco'))
+      errors.add(:base, I18n.t('activerecord.errors.models.usuario.codigo_de_verificacao.blank'))
     else
       if !self.numero_do_telefone.blank?
         @dispositivo_primario = Dispositivo.find_all_by_numero_do_telefone_real(self.numero_do_telefone,self.codigo_de_verificacao).first
