@@ -21,8 +21,18 @@ class Usuario < ActiveRecord::Base
     :recoverable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :nome, :identificador_do_hardware, :numero_do_telefone, :tipo_operador, :denunciante_situacao, :codigo_de_verificacao
-  attr_accessor :identificador_do_hardware, :numero_do_telefone
+  attr_accessible :email,
+                  :password,
+                  :password_confirmation,
+                  :remember_me, :nome,
+                  :identificador_do_hardware,
+                  :numero_do_telefone,
+                  :tipo_operador,
+                  :denunciante_situacao,
+                  :codigo_de_verificacao
+  attr_accessor :identificador_do_hardware,
+                :numero_do_telefone,
+                :codigo_de_verificacao
   
   has_many :dispositivos
   
