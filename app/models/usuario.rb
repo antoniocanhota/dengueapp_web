@@ -146,7 +146,7 @@ class Usuario < ActiveRecord::Base
   end
 
   def banindo?
-    return (self.changes.include? "denunciante_situacao" and self.situacao == BANIDO)
+    return (self.changes.include? "denunciante_situacao" and self.denunciante_situacao == Usuario::DENUNCIANTE_BANIDO)
   end
 
   def banibilidade
