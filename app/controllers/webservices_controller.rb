@@ -41,6 +41,11 @@ class WebservicesController < ApplicationController
       end
     end
   end
+
+  def reportar_excecao
+    DengueAppMailer.reportar_excecao_da_aplicacao_movel(params).deliver
+    render :nothing => true and return
+  end
   
   def registro_do_dispositivo
     dispositivo = Dispositivo.find_by_identificador_do_android(params[:identificador_do_android])

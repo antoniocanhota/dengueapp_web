@@ -1,0 +1,14 @@
+Ocorreu um erro na aplicação móvel:
+
+---
+Exceção: <%= @exception %>
+Versão do Android: <%= @android_version %>
+Identificação da instalação do Android: <%= @android_id %>
+    - Dispositivo existente na tabela 'Dispositivos'? <%= @dispositivo_encontrado %>
+    - Caso anterior afirmativa, existe usuário associado? <%= @usuario_encontrado %>
+Fabricante: <%= @manufacturer %>
+Modelo: <%= @model %>
+---
+Trace:
+
+<%= @trace %>
