@@ -1,6 +1,6 @@
 xml.instruct!
 xml.denuncias do
-  unless @denuncias.empty?
+  unless (@denuncias == nil or @denuncias.empty?)
     @denuncias.each do |d|
 	    xml.denuncia do
 	     xml.id d.id

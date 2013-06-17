@@ -17,12 +17,14 @@ class WebservicesController < ApplicationController
     else
       @denuncias = Denuncia.ativas
     end
-     respond_to do |format|
+    respond_to do |format|
       format.xml#  { render :xml => Denuncia.ativas }
     end
   end
   
   def publicar_denuncia
+    puts"aqui!!!"
+    binding.pry
     @denuncia = Denuncia.new(params[:denuncia])
     #Início da montagem da denúncia
     dispositivo = Dispositivo.find_by_identificador_do_android(params[:dispositivo][:identificador_do_android])
@@ -33,12 +35,15 @@ class WebservicesController < ApplicationController
       dispositivo.situacao = Dispositivo::CADASTRADO
     end
     #Fim da montagem da denúncia
-    respond_to do |format|
-      if @denuncia.save        
-        format.xml { render :xml => @denuncia.to_xml, :status => :created, :location => @denuncia }
-      else        
-        format.xml { render :xml => @denuncia.errors.to_xml, :status => :unprocessable_entity }
-      end
+    #respond_to do |format|
+      if @denuncia.save
+        render :status => :created, :nothing => true and return
+        #format.xml { render :xml => @denuncia.to_xml, :status => :created, :location => @denuncia }
+      else
+        #TODO: Fazer a chamada do execption notifier
+        render :status => :unprocessable_entity, :nothing => true and return
+       # format.xml { render :xml => @denuncia.errors.to_xml, :status => :unprocessable_entity }
+     # end
     end
   end
 
@@ -46,10 +51,17 @@ class WebservicesController < ApplicationController
     DengueAppMailer.reportar_excecao_da_aplicacao_movel(params).deliver
     render :nothing => true and return
   end
+
+  def status_do_servidor
+    render :status => :ok, :nothing => true and return
+  end
   
   def registro_do_dispositivo
-    dispositivo = Dispositivo.find_by_identificador_do_android(params[:identificador_do_android])
-    render :xml => dispositivo, :only => [:codigo_de_verificacao, :identificador_do_hardware, :numero_do_telefone]
+    @dispositivo = Dispositivo.where(:identificador_do_android => params[:identificador_do_android]).first;
+    respond_to do |format|
+      format.xml
+    end
+    #render :xml => dispositivo, :only => [:codigo_de_verificacao, :identificador_do_hardware, :numero_do_telefone]
   end
   
 end

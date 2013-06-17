@@ -12,7 +12,8 @@ Dengueapp::Application.routes.draw do
   match "webservices/denuncias" => "webservices#denuncias", :as => "webservice_denuncias"
   match "webservices/denuncias/publicar" => "webservices#publicar_denuncia", :as => "webservice_publicar_denuncia", :via => :post
   match "webservices/reportar_excecao" => "webservices#reportar_excecao", :as => "webservice_reportar_excecao", :via => :post
-  match "webservices/registro_do_dispositivo/:identificador_do_android" => "webservices#registro_do_dispositivo", :as => "webservice_registro_do_dispositivo"
+  match "webservices/status_do_servidor" => "webservices#status_do_servidor", :as => "webservice_status_do_servidor", :via => :post
+  match "webservices/registro_do_dispositivo" => "webservices#registro_do_dispositivo", :as => "webservice_registro_do_dispositivo"
 
   match "usuario/:id/cancelar/" => "devise/registrations#cancelar", :as => "cancelar_usuario_registration"
   devise_for :usuarios
