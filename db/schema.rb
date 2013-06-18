@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130218023613) do
+ActiveRecord::Schema.define(:version => 20130618012023) do
 
   create_table "denuncias", :force => true do |t|
     t.datetime "data_e_hora"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20130218023613) do
     t.string   "apelido"
     t.string   "situacao"
     t.boolean  "banivel"
+    t.string   "codigo_de_ativacao"
   end
 
   create_table "usuarios", :force => true do |t|

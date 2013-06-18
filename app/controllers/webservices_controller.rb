@@ -23,8 +23,6 @@ class WebservicesController < ApplicationController
   end
   
   def publicar_denuncia
-    puts"aqui!!!"
-    binding.pry
     @denuncia = Denuncia.new(params[:denuncia])
     #Início da montagem da denúncia
     dispositivo = Dispositivo.find_by_identificador_do_android(params[:dispositivo][:identificador_do_android])

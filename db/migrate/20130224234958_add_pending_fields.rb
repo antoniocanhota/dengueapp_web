@@ -1,8 +1,8 @@
 class AddPendingFields < ActiveRecord::Migration
   def up
     #cria a coluna situacao_denunciante e migra os dados da tabela Denunciante e aponta as novas chaves
-    add_column :usuarios, :denunciante_situacao, :string, :limit => 4
-    add_column :dispositivos, :usuario_id, :integer
+    #add_column :usuarios, :denunciante_situacao, :string, :limit => 4
+    #add_column :dispositivos, :usuario_id, :integer
     #Denunciante.find_each do |de|
     #  if de.usuario
     #    de.usuario.update_attribute(:denunciante_situacao,de.situacao)
@@ -11,10 +11,10 @@ class AddPendingFields < ActiveRecord::Migration
     #    end
     #  end
     #end
-    drop_table :denunciantes
+    #drop_table :denunciantes
     #cria as colunas moderador e administrador
-    add_column :usuarios, :moderador, :boolean
-    add_column :usuarios, :administrador, :boolean
+    #add_column :usuarios, :moderador, :boolean
+    #add_column :usuarios, :administrador, :boolean
     #Operador.find_each do |o|
     #  if o.situacao != Operador::INATIVO
     #    if o.tipo == Operador::ADMINISTRADOR
@@ -24,7 +24,7 @@ class AddPendingFields < ActiveRecord::Migration
     #    end
     #  end
     #end
-    drop_table :operadores
+    #drop_table :operadores
   end
 
   def down
