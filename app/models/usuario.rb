@@ -25,14 +25,10 @@ class Usuario < ActiveRecord::Base
                   :password,
                   :password_confirmation,
                   :remember_me, :nome,
-                  :identificador_do_hardware,
-                  :numero_do_telefone,
                   :tipo_operador,
                   :denunciante_situacao,
-                  :codigo_de_verificacao
-  attr_accessor :identificador_do_hardware,
-                :numero_do_telefone,
-                :codigo_de_verificacao
+                  :codigo_de_ativacao
+  attr_accessor :codigo_de_ativacao
   
   has_many :dispositivos
   
@@ -49,7 +45,7 @@ class Usuario < ActiveRecord::Base
   validate :verificar_existencia_do_dispositivo,
               :on => :create,
               :if => :denunciante?
-  validate :codigo_de_verificacao,
+  validate :codigo_de_ativacao,
               :length => {:in => 1..6},
               :on => :create,
               :if => :denunciante?
@@ -139,20 +135,14 @@ class Usuario < ActiveRecord::Base
   end
 
   def verificar_existencia_do_dispositivo
-    if self.numero_do_telefone.blank? and self.identificador_do_hardware.blank?
-      errors.add(:base, I18n.t('activerecord.errors.models.usuario.numero_de_telefone_e_identificador_de_hardware_em_branco'))
-    elsif self.codigo_de_verificacao.blank?
-      errors.add(:base, I18n.t('activerecord.errors.models.usuario.codigo_de_verificacao.blank'))
-    else
-      if !self.numero_do_telefone.blank?
-        @dispositivo_primario = Dispositivo.find_all_by_numero_do_telefone_real(self.numero_do_telefone,self.codigo_de_verificacao).first
-      elsif !self.identificador_do_hardware.blank?
-        @dispositivo_primario = Dispositivo.find_all_by_identificador_do_hardware_real(self.identificador_do_hardware,self.codigo_de_verificacao).first
-      end
+   if self.codigo_de_ativacao.blank?
+      errors.add(:base, I18n.t('activerecord.errors.models.usuario.codigo_de_ativacao.blank'))
+   else
+     @dispositivo_primario = Dispositivo.where(:codigo_de_ativacao => codigo_de_ativacao).first
       if @dispositivo_primario.nil?
         errors.add(:base, I18n.t('activerecord.errors.models.usuario.dispositivo_nao_encontrado'))
       end
-    end
+   end
   end
 
   def banindo?

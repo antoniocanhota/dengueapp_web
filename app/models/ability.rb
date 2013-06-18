@@ -12,10 +12,10 @@ class Ability
       can :read, Denuncia, :situacao => Denuncia::ATIVA
       cannot [:abandonar,:reativar,:cancelar,:resolver], Denuncia
       can :resolver, Denuncia, ("situacao = #{Denuncia::ATIVA} and dispositivo_id in (select id from dispositivos where usuario_id = #{usuario.id})") do |d|
-        d.dispositivo.usuario_id == usuario.id and d.situacao == Denuncia::ATIVA
+        d.dispositivo.try(:usuario_id) == usuario.id and d.situacao == Denuncia::ATIVA
       end
       can :cancelar, Denuncia, ("situacao = #{Denuncia::ATIVA} dispositivo_id in (select id from dispositivos where usuario_id = #{usuario.id})") do |d|
-        d.dispositivo.usuario_id == usuario.id and d.situacao == Denuncia::ATIVA
+        d.dispositivo.try(:usuario_id) == usuario.id and d.situacao == Denuncia::ATIVA
       end
       can :manage, Dispositivo, :usuario_id => usuario.id
     end
