@@ -14,16 +14,12 @@ class DispositivosController < ApplicationController
       redirect_to dispositivos_path, :alert => "Um apelido deve ser informado."
       return
     else
-      dispositivo_por_imei = Dispositivo.find_all_by_identificador_do_hardware_real(params[:identificador_do_hardware],params[:codigo_de_verificacao]).first
-      dispositivo_por_numero_do_telefone = Dispositivo.find_all_by_numero_do_telefone_real(params[:numero_do_telefone],params[:codigo_de_verificacao]).first
-      if dispositivo_por_numero_do_telefone
-        dispositivo = dispositivo_por_numero_do_telefone
-      elsif dispositivo_por_imei
-        dispositivo = dispositivo_por_imei
-      else
+      dispositivo = Dispositivo.where(:codigo_de_ativacao => params[:codigo_de_ativacao]).first
+      if (dispositivo == nil)
         redirect_to dispositivos_path, :alert => "Nenhum dispositivo foi encontrado com os dados informados."
         return
       end
+      binding.pry
       if dispositivo and dispositivo.usuario_id.blank?
         dispositivo.apelido = params[:apelido]
         dispositivo.usuario_id = current_user.id

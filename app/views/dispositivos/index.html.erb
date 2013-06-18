@@ -29,17 +29,9 @@
     <hr>
     <div class="row-fluid">
       <%= form_tag(vincular_dispositivos_path, :method => "put", :html => {:class => "form-horizontal"}) do %>
-          <%= label_tag(:numero_do_telefone, "Número do Telefone", :class => "control-label") %>
+          <%= label_tag(:codigo_de_ativacao, "Código de Ativação", :class => "control-label") %>
           <div class="controls">
-            <%= text_field_tag :numero_do_telefone %>
-          </div>
-          <%= label_tag(:identificador_do_hardware, "IMEI", :class => "control-label") %>
-          <div class="controls">
-            <%= text_field_tag :identificador_do_hardware %>
-          </div>
-          <%= label_tag(:codigo_de_verificacao, "Código de Verificação", :class => "control-label") %>
-          <div class="controls">
-            <%= text_field_tag :codigo_de_verificacao %>
+            <%= text_field_tag :codigo_de_ativacao %>
           </div>
           <%= label_tag(:apelido, "Apelido", :class => "control-label") %>
           <div class="controls">
