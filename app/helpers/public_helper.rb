@@ -2,9 +2,9 @@
 # encoding: utf-8
 
 module PublicHelper
-  VERSAO_ANDROID = "10"
-  VERSAO_ANDROID_HUMANO = "1.0"
-  DATA_ULTIMA_VERSAO_ANDROID = "24/02/2013"
+  VERSAO_ANDROID = "20"
+  VERSAO_ANDROID_HUMANO = "2.0"
+  DATA_ULTIMA_VERSAO_ANDROID = "18/06/2013"
 
   def resoruce_name
     :usuario
