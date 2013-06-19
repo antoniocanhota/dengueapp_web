@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20130618012023) do
     t.string   "apelido"
     t.string   "situacao"
     t.boolean  "banivel"
-    t.string   "codigo_de_ativacao"
+    t.integer   "codigo_de_ativacao"
   end
 
   create_table "usuarios", :force => true do |t|

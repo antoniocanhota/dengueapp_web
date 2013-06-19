@@ -1,5 +1,5 @@
 class AddCodigoDeAtivacaoToDispositivo < ActiveRecord::Migration
   def change
-    add_column :dispositivos, :codigo_de_ativacao, :string
+    add_column :dispositivos, :codigo_de_ativacao, :integer
   end
 end
