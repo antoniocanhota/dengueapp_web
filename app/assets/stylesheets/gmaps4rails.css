@@ -1,3 +1,6 @@
+#map label { width: auto; display:inline; }
+#map img { max-width: none; }
+
 .fill_screen {
     height: 500px;
     margin-left: -20px;
