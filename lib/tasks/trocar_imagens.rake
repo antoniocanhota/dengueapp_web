@@ -7,7 +7,7 @@ namespace :denuncias do
   task :trocar_imagens => :environment do
     i = 1;
     Denuncia.all.each do |d|
-      d.foto = "foto_denuncia_production_#{i}.jpg"
+      d.foto = File.new("foto_denuncia_production_#{i}.jpg", "r")
       d.save
       i = i + 1;
     end
