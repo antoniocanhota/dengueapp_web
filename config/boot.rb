@@ -7,4 +7,4 @@ require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
 
 #Ver detalhes em http://stackoverflow.com/questions/4980877/rails-error-couldnt-parse-yaml
 require 'yaml'
-YAML::ENGINE.yamler = 'syck'
+YAML::ENGINE.yamler = 'psych'
