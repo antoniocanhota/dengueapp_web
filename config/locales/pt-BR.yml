@@ -198,7 +198,7 @@ pt-BR:
   time:
     am: ''
     formats:
-      long: ! '%a, %d de %B de %Y, %H:%M h'
+
       short: ! '%d/%m, %H:%M h'
     pm: ''
   unauthorized:
