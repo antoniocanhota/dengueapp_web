@@ -13,6 +13,7 @@ gem 'gmaps4rails'
 gem "paperclip", "~> 3.0"
 gem "paperclip-dropbox"
 gem 'psych'
+gem "therubyracer", :require => 'v8'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -21,7 +22,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.1.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'twitter-bootstrap-rails', '2.1.7'
-  gem 'therubyracer'
+  #gem 'therubyracer'
 end
 
 group :test do
@@ -44,7 +45,7 @@ group :development do
 end
 
 group :production do
-  gem 'pg'
+  gem 'rails_12factor'
   #gem 'thin'
 
 end
