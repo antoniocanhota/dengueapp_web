@@ -194,8 +194,9 @@ pt-BR:
     array:
       last_word_connector: ! ' e '
       two_words_connector: ! ' e '
+      words_connector: ! ", "
   time:
-    am: ''
+
     formats:
     default: ! '%a, %d de %B de %Y, %H:%M:%S %z'
       long: ! '%a, %d de %B de %Y, %H:%M h'
